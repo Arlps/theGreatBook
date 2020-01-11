@@ -53,6 +53,11 @@ body{
 .row .panel-body{
 	height: 250px; overflow: hidden; border: 0px solid #ccc; 
 }
+@media screen and (max-width: 375px) {
+	.row .panel-body{
+		height: auto;
+	}
+}
 .row>div{ padding: 0 3px;}
 
 .title{
