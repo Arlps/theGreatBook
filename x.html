@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>x</title>
+		<link rel="stylesheet" href="reset.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="x.css"/>
+		<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+		<script src="echarts/echarts4.min.js"></script>
+		<script src="echarts/echart-GL.js"></script>
+		<script src="echarts/dark.js"></script>
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<!-- 上左 -->
+				<div class="col-xs-3">
+					<div class="panel panel-x">
+					    <div class="系统指标 System Index">
+					        系统指标 System Index
+					    </div>
+					    <div class="panel-body x">
+					        <ul id="xlist">
+								<li>AUSTRALIA 01 MAINLAND</li>
+								<li>AUSTRALIA 02 MAINLAND</li>
+								<li>AUSTRALIA 03 MAINLAND</li>
+								<li>AUSTRALIA 04 MAINLAND</li>
+								<li>AUSTRALIA 05 MAINLAND</li>
+							</ul>
+					    </div>
+					</div>
+				</div>
+				
+				<!-- 上中 -->
+				<div class="col-xs-6">
+					<div class="panel panel-x">
+					    <div class="系统指标 System Index">
+					        系统指标 System Index
+					    </div>
+					    <div class="panel-body" id="mainView">
+							<!-- 上中1 -->
+					        <div class="col-xs-4 x" id="x1"></div>
+							<!-- 上中2 -->
+							<div class="col-xs-4">
+								<div class="row">
+									<div class="col-xs-4">
+										<div class="total1 text-center">
+											<div class="num">5907</div>
+											<p class="des">AUSTRALIA</p>
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="total1 text-center">
+											<div class="num">6024</div>
+											<p class="des">AUSTRALIA</p>
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="total1 text-center">
+											<div class="num">0287</div>
+											<p class="des">AUSTRALIA</p>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="title">Department Availability</div>
+									<div class="x" id="x2"></div>
+								</div>
+							</div>
+							<!-- 上中3 -->
+							<div class="col-xs-4">
+								<div class="title">Department Availability</div>
+								<div class="x" id="x3"></div>
+							</div>
+					    </div>
+					</div>
+				</div>
+				
+				<!-- 上右 -->
+				<div class="col-xs-3">
+					<div class="panel panel-x">
+					    <div class="系统指标 System Index">
+					        系统指标 System Index
+					    </div>
+					    <div class="panel-body">
+					        <div class="x" id="x5"></div>
+					    </div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<!-- 下左 -->
+				<div class="col-xs-3">
+					<div class="panel panel-x">
+					    <div class="系统指标 System Index">
+					        系统指标 System Index
+					    </div>
+					    <div class="panel-body">
+					        <div class="total2">
+								<div class="des">
+									<p class="des1">AUSTRALIA LIGHT</p>
+									<p class="des2">Repair Order</p>
+								</div>
+					        	<div class="num">5927</div>
+					        </div>
+							<div class="total2">
+								<div class="des">
+									<p class="des1">AUSTRALIA LIGHT</p>
+									<p class="des2">Repair Order</p>
+								</div>
+								<div class="num">366</div>
+							</div>
+							<div class="total2">
+								<div class="des">
+									<p class="des1">AUSTRALIA LIGHT</p>
+									<p class="des2">Repair Order</p>
+								</div>
+								<div class="num">3277</div>
+							</div>
+					    </div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="panel panel-x">
+					    <div class="系统指标 System Index">
+					        系统指标 System Index
+					    </div>
+					    <div class="panel-body">
+					       <div class="col-xs-6">
+							   <ul class="xtable" id="xtable1">
+								   <li>
+									   <p>AUSTRALIA LAND</p>
+									   <p>EMECY</p>
+									   <p>61.5%</p>
+								   </li>
+							   </ul>
+						   </div>
+						   <div class="col-xs-6">
+							   <ul class="xtable" id="xtable2">
+								   <li>
+									   <p>AUSTRALIA LAND</p>
+									   <p>EMECY</p>
+									   <p>61.5%</p>
+								   </li>
+							   </ul>
+						   </div>
+					    </div>
+					</div>
+				</div>
+				<div class="col-xs-3">
+					<div class="panel panel-x">
+					    <div class="系统指标 System Index">
+					        系统指标 System Index
+					    </div>
+					    <div class="panel-body">
+					        <div class="x" id="x4"></div>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+	<script src="x.js"></script>
+</html>
