@@ -1,3 +1,7 @@
+@font-face { 
+font-family : lcdD ; 
+src : url( lcdD.ttf ) ; 
+}
 html,body{ height: 100%;}
 
 body{
@@ -21,6 +25,7 @@ body{
 	top: 50%; left: 50%; transform: translate(-50%, -50%);
 	animation:xxx 1s infinite;
 }
+
 
 @keyframes xxx
 {
