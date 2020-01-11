@@ -874,7 +874,7 @@ function wave(data,percent){
 function chart(option, id) {
 	var mychart = echarts.init(document.getElementById(id), 'dark');
 	mychart.setOption(option);
-	console.log(mychart)
+	// console.log(mychart)
 	$(window).resize(function(){
 		mychart.resize()
 	})
@@ -906,7 +906,7 @@ function animate(id){
 	var $table=$("#"+id)
 	setInterval(function(){
 		var $li=$table.find("li:first");
-		var li_str=$li.html(); console.log(li_str)
+		var li_str=$li.html();// console.log(li_str)
 		$li.fadeOut(500,function(){
 			$li.remove();
 			var $li2=$("<li >"+li_str+"</li>")
@@ -922,7 +922,7 @@ function animate2(id){
 	var $table=$("#"+id)
 	setInterval(function(){
 		var $li=$table.find("li:first");
-		var li_str=$li.html(); console.log(li_str)
+		var li_str=$li.html(); //console.log(li_str)
 		$li.fadeOut(500,function(){
 			$li.remove();
 			$table.find("li:nth-child(3)").addClass("point").removeClass("default")
