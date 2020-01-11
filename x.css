@@ -1,16 +1,12 @@
 html,body{ height: 100%;}
-@media screen and (max-width: 750px) {
-	body{ background: url(x/bg.jpg) }
-	#mainView{ background: none; }
-   .container{
-        width: 100%; padding: 5px 0;
-		background: url(x/bg.jpg) ; 
-    }
-}
+
 body{
 	/* background: url(x/bg.jpg) ; */
 	background-size: 100% 100% ; padding-top: 20px;
 	font-family: "lcdD"; color: #52C2D5; color: #25B4D2; text-shadow: 0px 0px 4px #52C2D6;
+}
+@media screen and (max-width: 375px) {
+	body{ background: url(x/bg.jpg);background-size: 100% 100% ; }
 }
 
 #loading{
@@ -39,6 +35,14 @@ body{
 	width: 1650px; padding: 20px 100px;
 	background: url(x/bigleft.png) left center no-repeat,url(x/bigright.png) right center no-repeat;
 	background-size: 40% 100%;
+}
+
+@media screen and (max-width: 375px) {
+	#mainView{ background: none; }
+   .container{
+        width: 100%; padding: 0px 15px;
+		background: url(x/bg.jpg) ; 
+    }
 }
 
 
