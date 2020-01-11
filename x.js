@@ -852,7 +852,7 @@ chart(option1, "x1");
 chart(option2, "x2");
 chart(option3, "x3");
 chart(option4, "x4");
-chart(option5, "x5");
+// chart(option5, "x5");
 // var op = myChart.getOption();
 // op.series[1].data[1].value = 80;
 // myChart.setOption(op);
