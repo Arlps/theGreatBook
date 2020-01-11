@@ -49,6 +49,15 @@ body{
 #xlist li:nth-child(2),#xlist li:nth-child(4){ opacity: 0.65; background-size: 82% 82%; font-size: 20px;}}
 #xlist li:nth-child(6){ opacity: 0.1;}
 
+#xlist .point{
+	background-image:url(x/arrow2.png);
+	background-size: 100% 100%;
+}
+#list .default{
+	background-image:url(x/arrow1.png);
+	background-size: 82% 82%;
+}
+
 .total1{
 	border:0px solid #52C2D6; border-radius: 7px; margin-bottom: 20px;
 	padding: 5px 5px;

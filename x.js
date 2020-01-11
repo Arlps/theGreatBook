@@ -925,10 +925,7 @@ function animate2(id){
 		var li_str=$li.html(); console.log(li_str)
 		$li.fadeOut(500,function(){
 			$li.remove();
-			$table.find("li:nth-child(3)").css({
-				"background-image":"url(x/arrow2.png)",
-				"background-size": "100% 100%"
-			})
+			$table.find("li:nth-child(3)").addClass("point").removeClass("default")
 			$table.find("li:first").css({
 				"background-size": "70% 70%"
 			})
@@ -938,10 +935,7 @@ function animate2(id){
 			// 
 			
 		})
-		$table.find("li:nth-child(3)").css({
-			"background-image":"url(x/arrow1.png)",
-			"background-size": "82% 82%"
-		})
+		$table.find("li:nth-child(3)").addClass("default").removeClass("point")
 		var $li2=$("<li >"+li_str+"</li>")
 		$table.append($li2); 
 		// $table.css({
