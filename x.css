@@ -1,4 +1,12 @@
 html,body{ height: 100%;}
+@media screen and (max-width: 750px) {
+	body{ background: url(x/bg.jpg) }
+	#mainView{ background: none; }
+   .container{
+        width: 100%; padding: 5px 0;
+		background: url(x/bg.jpg) ; 
+    }
+}
 body{
 	/* background: url(x/bg.jpg) ; */
 	background-size: 100% 100% ; padding-top: 20px;
@@ -32,11 +40,7 @@ body{
 	background: url(x/bigleft.png) left center no-repeat,url(x/bigright.png) right center no-repeat;
 	background-size: 40% 100%;
 }
-@media screen and (max-width: 750px) {
-   .container{
-        width: 100%; padding: 5px 0;
-    }
-}
+
 
 .panel-x{ border-color: #52C2D6; background: none; border: none;  }
 .panel{ 
