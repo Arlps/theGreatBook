@@ -1,5 +1,5 @@
 body{
-	/* background: url(x/bg.jpg) ; */
+	background: url(x/bg.jpg) ;
 	background-size: 100% 100% ; padding-top: 20px;
 	font-family: "lcdD"; color: #52C2D5; color: #25B4D2; text-shadow: 0px 0px 4px #52C2D6;
 }
