@@ -751,6 +751,7 @@ option4 = {
 // 心电图
 var beats=[15,0,-13,140,-45,0];
 var date=[];
+
 for (var i = 0; i < 50; i++) {
     // data.push(Math.ceil(Math.random() * 800));
     date.push(getTime(Math.round(new Date().getTime() / 1000) - i))
@@ -834,7 +835,7 @@ option5 = {
 			opacity:0.1,
             width: 0,
             shadowBlur: 0,
-            color: colorFormatOnChart(100,200)
+            color: [[0.1, '#17D5F7'],[0.2, '#1BF0AC'],[0.3, '#3ED25E'],[0.4, '#A2DA2A'],[0.5, '#DBF743'],[0.6, '#F4DE48'],[0.7, '#F3B92F'],[0.8, '#F5841F'],[0.9, '#F15041'],[1, '#F12C2C']]
           }
         },
         axisTick: {
@@ -873,16 +874,17 @@ option5 = {
           // borderColor: '#fff',
           // shadowColor: '#fff', //默认透明
           shadowBlur: 2,
-          offsetCenter: [0, '-15%'], // x, y，单位px
+          offsetCenter: [0, '-20%'], // x, y，单位px
           textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
             color: 'rgba(255,255,255,0.4)',
             fontSize: 62,
-            fontWeight:'bold'
+            fontWeight:'bold',
+			fontFamily:"lcdD"
           },
           formatter: '{value}'
         },
         data: [{
-          name: "今日报警",
+          name: "HEARTBEATS",
           value: 100
         }]
       },
@@ -892,7 +894,7 @@ option5 = {
         splitNumber: 8, //刻度数量
         min: 0,
         max: 100,
-        radius: '70%', //图表尺寸
+        radius: '60%', //图表尺寸
         center: ['50%', '80%'],
         startAngle: 180,//刻度起始
         endAngle: 0,//刻度结束
@@ -941,7 +943,6 @@ option5 = {
       }]
 };
 
-
 var x1=chart(option1, "x1");
 var x2=chart(option2, "x2");
 var x3=chart(option3, "x3");
@@ -951,7 +952,8 @@ var x5=chart(option5, "x5");
 //心电图动态变化
 var beatsNum=0; beatsInterval=1,beatsTimes=0;
 var o5=x5.getOption();
-setInterval(function() {
+setInterval(function() { 
+	// return;
     data.shift();
 	if(beatsNum<=beats.length){
 		data.push(beats[beatsNum]); 
@@ -963,6 +965,7 @@ setInterval(function() {
 		beatsTimes=parseInt(60/((beats.length+beatsInterval)/10))
 		console.log(beatsTimes);
 		o5.series[1].data[0].value=beatsTimes;
+		o5.series[1].axisLine.lineStyle.color=colorFunc(beatsTimes/120)
 		x5.setOption(o5)
 	}
 	beatsNum++;	
@@ -1128,74 +1131,19 @@ function wave(num,range){
 }
 
 
-
-// 根据报警总数比例显示表盘颜色
-function colorFormatOnChart(value,max){
-  if (value/max < 0.1) {
-    return [[0.1, '#17D5F7'],
-      [1, '#464646']]
-  } else if (value / max < 0.2) {
-    return [[0.1, '#17D5F7'],
-      [0.2, '#1BF0AC'],
-      [1, '#464646']]
-  } else if (value / max < 0.3) {
-    return [[0.1, '#17D5F7'],
-      [0.2, '#1BF0AC'],
-      [0.3, '#3ED25E'],
-      [1, '#464646']]
-  } else if (value / max < 0.4) {
-    return [[0.1, '#17D5F7'],
-      [0.2, '#1BF0AC'],
-      [0.3, '#3ED25E'],
-      [0.4, '#A2DA2A'],
-      [1, '#464646']]
-  } else if (value / max < 0.5) {
-    return [[0.1, '#17D5F7'],
-      [0.2, '#1BF0AC'],
-      [0.3, '#3ED25E'],
-      [0.4, '#A2DA2A'],
-      [0.5, '#DBF743'],
-      [1, '#464646']]
-  } else if (value / max < 0.6) {
-    return [[0.1, '#17D5F7'],
-      [0.2, '#1BF0AC'],
-      [0.3, '#3ED25E'],
-      [0.4, '#A2DA2A'],
-      [0.5, '#DBF743'],
-      [0.6, '#F4DE48'],
-      [1, '#464646']]
-  } else if (value / max < 0.7) {
-    return [[0.1, '#17D5F7'],
-      [0.2, '#1BF0AC'],
-      [0.3, '#3ED25E'],
-      [0.4, '#A2DA2A'],
-      [0.5, '#DBF743'],
-      [0.6, '#F4DE48'],
-      [0.7, '#F3B92F'],
-      [1, '#464646']]
-  } else if (value / max < 0.8) {
-    return [[0.1, '#17D5F7'],
-      [0.2, '#1BF0AC'],
-      [0.3, '#3ED25E'],
-      [0.4, '#A2DA2A'],
-      [0.5, '#DBF743'],
-      [0.6, '#F4DE48'],
-      [0.7, '#F3B92F'],
-      [0.8, '#F5841F'],
-      [1, '#464646']]
-  } else if (value / max > 0.9) {
-    return [[0.1, '#17D5F7'],
-      [0.2, '#1BF0AC'],
-      [0.3, '#3ED25E'],
-      [0.4, '#A2DA2A'],
-      [0.5, '#DBF743'],
-      [0.6, '#F4DE48'],
-      [0.7, '#F3B92F'],
-      [0.8, '#F5841F'],
-      [0.9, '#F15041'],
-      [1, '#F12C2C']]
-  }
+// 心跳扇形图颜色进度处理
+function colorFunc(value){
+	var colorRange=[[0.1, '#17D5F7'],[0.2, '#1BF0AC'],[0.3, '#3ED25E'],[0.4, '#A2DA2A'],[0.5, '#DBF743'],[0.6, '#F4DE48'],[0.7, '#F3B92F'],[0.8, '#F5841F'],[0.9, '#F15041'],[1, '#F12C2C']];
+	var index=parseInt(value*10);
+	var arr=colorRange.slice(0,index);
+	if(arr.length<10){
+		arr.push([1, '#464646'])
+	}
+	// console.log(arr)
+	return arr;
 }
+
+
 
 // 格式化时间
 function getTime() {
