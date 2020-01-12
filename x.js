@@ -44,7 +44,7 @@ var option1 = {
 			},
 			axisLabel: {
 				show: false
-			},
+			}, 
 			pointer: {
 				show: false
 			},
