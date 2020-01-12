@@ -749,7 +749,7 @@ option4 = {
 
 
 // 心电图
-var beats=[15,0,-13,140,-45];
+var beats=[15,0,-13,140,-45,0];
 var date=[];
 for (var i = 0; i < 50; i++) {
     // data.push(Math.ceil(Math.random() * 800));
@@ -954,7 +954,7 @@ var o5=x5.getOption();
 setInterval(function() {
     data.shift();
 	if(beatsNum<=beats.length){
-		data.push(beats[beatsNum]);
+		data.push(beats[beatsNum]); 
 	}else if((beatsNum>beats.length) && (beatsNum<(beats.length+beatsInterval))){
 		data.push(0)
 	}else{
