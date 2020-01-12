@@ -761,10 +761,10 @@ console.log(data)
 option5 = {
 	backgroundColor: 'rgba(0,0,0,0)',
     grid: [{
-        left: 20,
-        right: 20,
-        top: 80,
-        bottom: 20,
+        left: 0,
+        right: 0,
+        top: 30,
+        bottom: 10,
         containLabel: true
     }],
     tooltip: {
@@ -803,7 +803,7 @@ option5 = {
         },
         splitLine: {
             lineStyle: {
-                color: '#cccccc'
+                color: 'rgba(255,255,255,0.2)'
             }
         }
     }],
