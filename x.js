@@ -809,7 +809,8 @@ option5 = {
         showSymbol: false,
         lineStyle: {
             normal: {
-                width: 1
+                width: 1,
+				color:'#63EBFF'
             }
         },
         data: data
