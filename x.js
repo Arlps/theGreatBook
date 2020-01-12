@@ -78,7 +78,7 @@ var option1 = {
 				}
 			},
 			data: [{
-					value: 50,
+					value: 40,
 					name: "",
 					label: {
 						normal: {
@@ -97,7 +97,7 @@ var option1 = {
 					}
 				},
 				{
-					value: 15,
+					value:60,
 					name: "",
 					label: {
 						normal: {
@@ -749,6 +749,147 @@ var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
 var days = ['Saturday', 'Friday', 'Thursday',
         'Wednesday', 'Tuesday', 'Monday', 'Sunday'];
 
+
+
+var x1=chart(option1, "x1");
+var x2=chart(option2, "x2");
+var x3=chart(option3, "x3");
+var x4=chart(option4, "x4");
+// chart(option5, "x5");
+// var op = myChart.getOption();
+// op.series[1].data[1].value = 80;
+// myChart.setOption(op);
+
+waveChart(60,5,x1)
+function waveChart(num,range,chart){
+	var res=num;
+	var flag=1;
+	var option=chart.getOption();
+	setInterval(function(){
+		if(flag){
+			res+=2;
+			if(res>=num+range){
+				flag=0
+			}
+		}else{
+			res-=2;
+			if(res<=num-range){
+				flag=1
+			}
+		}
+		console.log(res);
+		option.series[1].data[0]=res
+		option.series[1].data[1]=(100-res)
+		chart.setOption(option)
+	},100)
+}
+
+function chart(option, id) {
+	var mychart = echarts.init(document.getElementById(id), 'dark');
+	mychart.setOption(option);
+	// console.log(mychart)
+	$(window).resize(function(){
+		mychart.resize()
+	})
+	return mychart;
+}
+
+
+
+xtable("xtable1");
+xtable("xtable2")
+function xtable(id){
+	;
+	var str=""
+	for (var i = 0; i < 10; i++) {
+		str+="<li>"+
+			   "<p>"+"AUSTRALIA LAND".slice(0,parseInt(Math.random()*7)+5)+ i +"</p>"+
+			   "<p>EMECY"+ i +"</p>"+
+			   "<p>"+parseInt(Math.random()*100)+"%"+ i +"</p>"+
+			"</li>";
+	}
+	$("#"+id).html(str);
+}
+
+animate2("xlist")
+animate("xtable1");
+animate("xtable2");
+
+function animate(id){
+	var $table=$("#"+id)
+	setInterval(function(){
+		var $li=$table.find("li:first");
+		var li_str=$li.html();// console.log(li_str)
+		$li.fadeOut(500,function(){
+			$li.remove();
+			var $li2=$("<li >"+li_str+"</li>")
+			$table.append($li2); 
+			// $li2.hide()
+			// $li2.fadeIn("slow")
+		})
+		// $li.hide()
+	},2000)
+}
+
+function animate2(id){
+	var $table=$("#"+id)
+	setInterval(function(){
+		var $li=$table.find("li:first");
+		var li_str=$li.html(); //console.log(li_str)
+		$li.fadeOut(500,function(){
+			$li.remove();
+			$table.find("li:nth-child(3)").addClass("point").removeClass("default")
+			$table.find("li:first").css({
+				"background-size": "70% 70%"
+			})
+			// $table.css({
+			// 	transform:"translate(0,-3%)"
+			// })
+			// 
+			
+		})
+		$table.find("li:nth-child(3)").addClass("default").removeClass("point")
+		var $li2=$("<li >"+li_str+"</li>")
+		$table.append($li2); 
+		// $table.css({
+		// 	transform:"translate(0,-3%)"
+		// })
+		
+	},3500)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// wave(100,5)
+function wave(num,range){
+	var res=num;
+	var flag=1;
+	setInterval(function(){
+		if(flag){
+			res+=1.5;
+			if(res>=num+range){
+				flag=0
+			}
+		}else{
+			res-=1.5;
+			if(res<=num-range){
+				flag=1
+			}
+		}
+		console.log(res)
+	},50)
+}
+
+
 var data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8,0],[0,9,0],[0,10,0],[0,11,2],[0,12,4],[0,13,1],[0,14,1],[0,15,3],[0,16,4],[0,17,6],[0,18,4],[0,19,4],[0,20,3],[0,21,3],[0,22,2],[0,23,5],[1,0,7],[1,1,0],[1,2,0],[1,3,0],[1,4,0],[1,5,0],[1,6,0],[1,7,0],[1,8,0],[1,9,0],[1,10,5],[1,11,2],[1,12,2],[1,13,6],[1,14,9],[1,15,11],[1,16,6],[1,17,7],[1,18,8],[1,19,12],[1,20,5],[1,21,5],[1,22,7],[1,23,2],[2,0,1],[2,1,1],[2,2,0],[2,3,0],[2,4,0],[2,5,0],[2,6,0],[2,7,0],[2,8,0],[2,9,0],[2,10,3],[2,11,2],[2,12,1],[2,13,9],[2,14,8],[2,15,10],[2,16,6],[2,17,5],[2,18,5],[2,19,5],[2,20,7],[2,21,4],[2,22,2],[2,23,4],[3,0,7],[3,1,3],[3,2,0],[3,3,0],[3,4,0],[3,5,0],[3,6,0],[3,7,0],[3,8,1],[3,9,0],[3,10,5],[3,11,4],[3,12,7],[3,13,14],[3,14,13],[3,15,12],[3,16,9],[3,17,5],[3,18,5],[3,19,10],[3,20,6],[3,21,4],[3,22,4],[3,23,1],[4,0,1],[4,1,3],[4,2,0],[4,3,0],[4,4,0],[4,5,1],[4,6,0],[4,7,0],[4,8,0],[4,9,2],[4,10,4],[4,11,4],[4,12,2],[4,13,4],[4,14,4],[4,15,14],[4,16,12],[4,17,1],[4,18,8],[4,19,5],[4,20,3],[4,21,7],[4,22,3],[4,23,0],[5,0,2],[5,1,1],[5,2,0],[5,3,3],[5,4,0],[5,5,0],[5,6,0],[5,7,0],[5,8,2],[5,9,0],[5,10,4],[5,11,1],[5,12,5],[5,13,10],[5,14,5],[5,15,7],[5,16,11],[5,17,6],[5,18,0],[5,19,5],[5,20,3],[5,21,4],[5,22,2],[5,23,0],[6,0,1],[6,1,0],[6,2,0],[6,3,0],[6,4,0],[6,5,0],[6,6,0],[6,7,0],[6,8,0],[6,9,0],[6,10,1],[6,11,0],[6,12,2],[6,13,1],[6,14,3],[6,15,4],[6,16,0],[6,17,0],[6,18,0],[6,19,0],[6,20,1],[6,21,2],[6,22,2],[6,23,6]];
 option5 = {
 	backgroundColor: 'rgba(0,0,0,0)',
@@ -846,104 +987,3 @@ option5 = {
         }
     }]
 }
-
-
-chart(option1, "x1");
-chart(option2, "x2");
-chart(option3, "x3");
-chart(option4, "x4");
-// chart(option5, "x5");
-// var op = myChart.getOption();
-// op.series[1].data[1].value = 80;
-// myChart.setOption(op);
-
-function update(chart,data,interval){
-	setInterval(function(){
-		var option=chart.setOption();
-		
-		chart.setOption(option)
-	},interval)
-}
-
-function wave(data,percent){
-	var value=data;
-	
-}
-
-
-function chart(option, id) {
-	var mychart = echarts.init(document.getElementById(id), 'dark');
-	mychart.setOption(option);
-	// console.log(mychart)
-	$(window).resize(function(){
-		mychart.resize()
-	})
-	return mychart;
-}
-
-
-
-xtable("xtable1");
-xtable("xtable2")
-function xtable(id){
-	;
-	var str=""
-	for (var i = 0; i < 10; i++) {
-		str+="<li>"+
-			   "<p>"+"AUSTRALIA LAND".slice(0,parseInt(Math.random()*7)+5)+ i +"</p>"+
-			   "<p>EMECY"+ i +"</p>"+
-			   "<p>"+parseInt(Math.random()*100)+"%"+ i +"</p>"+
-			"</li>";
-	}
-	$("#"+id).html(str);
-}
-
-animate2("xlist")
-animate("xtable1");
-animate("xtable2");
-
-function animate(id){
-	var $table=$("#"+id)
-	setInterval(function(){
-		var $li=$table.find("li:first");
-		var li_str=$li.html();// console.log(li_str)
-		$li.fadeOut(500,function(){
-			$li.remove();
-			var $li2=$("<li >"+li_str+"</li>")
-			$table.append($li2); 
-			// $li2.hide()
-			// $li2.fadeIn("slow")
-		})
-		// $li.hide()
-	},2000)
-}
-
-function animate2(id){
-	var $table=$("#"+id)
-	setInterval(function(){
-		var $li=$table.find("li:first");
-		var li_str=$li.html(); //console.log(li_str)
-		$li.fadeOut(500,function(){
-			$li.remove();
-			$table.find("li:nth-child(3)").addClass("point").removeClass("default")
-			$table.find("li:first").css({
-				"background-size": "70% 70%"
-			})
-			// $table.css({
-			// 	transform:"translate(0,-3%)"
-			// })
-			// 
-			
-		})
-		$table.find("li:nth-child(3)").addClass("default").removeClass("point")
-		var $li2=$("<li >"+li_str+"</li>")
-		$table.append($li2); 
-		// $table.css({
-		// 	transform:"translate(0,-3%)"
-		// })
-		
-	},3500)
-}
-
-
-
