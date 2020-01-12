@@ -14,7 +14,7 @@ body{
 @media screen and (max-width: 500px) {
 	html{ height: auto;}
 	body{ 
-		background: url(x/net.png);
+		background: url(x/net.png); background-size:50% 50%;
 		background-color: #0F0E1C; height: auto; 
 	}
 }
