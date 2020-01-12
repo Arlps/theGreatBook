@@ -750,13 +750,13 @@ function getTime() {
 }
 // 生成初始数据
 
-var beats=[0.2,0.2,0.2,0.2,0.2,0.2,15,0,-13,140,-45];
+var beats=[0,0,0,0,0,15,0,-13,140,-45];
 for (var i = 0; i < 50; i++) {
     // data.push(Math.ceil(Math.random() * 800));
     date.push(getTime(Math.round(new Date().getTime() / 1000) - i))
 }
 
-data=[0.2,0.2,0.2,0.2,0.2,0.2,15,0.2,-13,140,-45,0.2,0.2,0.2,0.2,0.2,0.2,15,0.2,-13,140,-45,0.2,0.2,0.2,0.2,0.2,0.2,15,0.2,-13,140,-45,0.2,0.2]
+data=[0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0]
 console.log(data)
 option5 = {
 	backgroundColor: 'rgba(0,0,0,0)',
@@ -830,15 +830,17 @@ var x4=chart(option4, "x4");
 var x5=chart(option5, "x5");
 
 //x5
-var beatsNum=0;
+var beatsNum=0; beatsInterval=10;
 setInterval(function() {
-	
     data.shift();
-    data.push(beats[beatsNum]);
-	beatsNum++;
-	if(beatsNum>=beats.length){
+	if(beatsNum<=beats.length){
+		data.push(beats[beatsNum]);
+	}else if((beatsNum>beats.length) && (beatsNum<(beats.length+beatsInterval))){
+		data.push(0)
+	}else{
 		beatsNum=0;
 	}
+	beatsNum++;	
 	
     date.shift()
     date.push(getTime(Math.round(new Date().getTime() / 1000)))
