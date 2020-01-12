@@ -544,21 +544,8 @@ option3 = {
         }
     ]
 };
-// 
-// setInterval(function (){
-//     option.series[0].data[0].value = (Math.random()*100).toFixed(2) - 0;
-//     option.series[1].data[0].value = (Math.random()*7).toFixed(2) - 0;
-//     option.series[2].data[0].value = (Math.random()*2).toFixed(2) - 0;
-//     option.series[3].data[0].value = (Math.random()*2).toFixed(2) - 0;
-//     myChart.setOption(option);
-// },2000)
 
 
-
-/*
-    @songcxa
-    @2017-11-15
-*/
 placeHolderStyle = {
     normal: {
          color: "rgba(0,0,0,0)",
@@ -742,12 +729,94 @@ option4 = {
 };
 
 
-var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
-        '7a', '8a', '9a','10a','11a',
-        '12p', '1p', '2p', '3p', '4p', '5p',
-        '6p', '7p', '8p', '9p', '10p', '11p'];
-var days = ['Saturday', 'Friday', 'Thursday',
-        'Wednesday', 'Tuesday', 'Monday', 'Sunday'];
+let {
+    date,
+    data
+} = {
+    date: [],
+    data: []
+}
+
+// 格式化时间
+function getTime() {
+    var ts = arguments[0] || 0;
+    var t, h, i, s;
+    t = ts ? new Date(ts * 1000) : new Date();
+    h = t.getHours();
+    i = t.getMinutes();
+    s = t.getSeconds();
+    // 可根据需要在这里定义时间格式
+    return (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
+}
+// 生成初始数据
+for (var i = 0; i < 50; i++) {
+    data.push(Math.ceil(Math.random() * 800));
+    date.push(getTime(Math.round(new Date().getTime() / 1000) - i))
+}
+option5 = {
+	backgroundColor: 'rgba(0,0,0,0)',
+    grid: [{
+        left: 20,
+        right: 20,
+        top: 80,
+        bottom: 20,
+        containLabel: true
+    }],
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            lineStyle: {
+                color: '#57617B'
+            }
+        }
+    },
+    xAxis: [{
+        type: 'category',
+        boundaryGap: false,
+        axisLine: {
+            lineStyle: {
+                color: '#57617B'
+            }
+        },
+        data: date
+    }],
+    yAxis: [{
+        type: 'value',
+        axisTick: {
+            show: false
+        },
+        axisLine: {
+            lineStyle: {
+                color: '#57617B'
+            }
+        },
+        axisLabel: {
+            formatter: '{value}',
+            textStyle: {
+                fontSize: 12
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                color: '#cccccc'
+            }
+        }
+    }],
+    series: [{
+        name: '发送',
+        type: 'line',
+        smooth:true,
+        showSymbol: false,
+        lineStyle: {
+            normal: {
+                width: 1
+            }
+        },
+        data: data
+    }]
+};
+
+
 
 
 
@@ -755,10 +824,22 @@ var x1=chart(option1, "x1");
 var x2=chart(option2, "x2");
 var x3=chart(option3, "x3");
 var x4=chart(option4, "x4");
-// chart(option5, "x5");
-// var op = myChart.getOption();
-// op.series[1].data[1].value = 80;
-// myChart.setOption(op);
+var x5=chart(option5, "x5");
+
+setInterval(function() {
+    data.shift();
+    data.push(Math.ceil(Math.random() * 800));
+    date.shift()
+    date.push(getTime(Math.round(new Date().getTime() / 1000)))
+    x5.setOption({
+        series: [{
+            data: data
+        }],
+        xAxis: [{
+            data: date
+        }],
+    });
+}, 100)
 
 waveChart(62,1,x1)
 function waveChart(num,range,chart){
@@ -777,7 +858,7 @@ function waveChart(num,range,chart){
 				flag=1
 			}
 		}
-		console.log(res);
+		// console.log(res);
 		option.series[1].data[0].value=res
 		option.series[1].data[1].value=(100-res);
 		chart.setOption(option)
@@ -890,100 +971,3 @@ function wave(num,range){
 }
 
 
-var data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8,0],[0,9,0],[0,10,0],[0,11,2],[0,12,4],[0,13,1],[0,14,1],[0,15,3],[0,16,4],[0,17,6],[0,18,4],[0,19,4],[0,20,3],[0,21,3],[0,22,2],[0,23,5],[1,0,7],[1,1,0],[1,2,0],[1,3,0],[1,4,0],[1,5,0],[1,6,0],[1,7,0],[1,8,0],[1,9,0],[1,10,5],[1,11,2],[1,12,2],[1,13,6],[1,14,9],[1,15,11],[1,16,6],[1,17,7],[1,18,8],[1,19,12],[1,20,5],[1,21,5],[1,22,7],[1,23,2],[2,0,1],[2,1,1],[2,2,0],[2,3,0],[2,4,0],[2,5,0],[2,6,0],[2,7,0],[2,8,0],[2,9,0],[2,10,3],[2,11,2],[2,12,1],[2,13,9],[2,14,8],[2,15,10],[2,16,6],[2,17,5],[2,18,5],[2,19,5],[2,20,7],[2,21,4],[2,22,2],[2,23,4],[3,0,7],[3,1,3],[3,2,0],[3,3,0],[3,4,0],[3,5,0],[3,6,0],[3,7,0],[3,8,1],[3,9,0],[3,10,5],[3,11,4],[3,12,7],[3,13,14],[3,14,13],[3,15,12],[3,16,9],[3,17,5],[3,18,5],[3,19,10],[3,20,6],[3,21,4],[3,22,4],[3,23,1],[4,0,1],[4,1,3],[4,2,0],[4,3,0],[4,4,0],[4,5,1],[4,6,0],[4,7,0],[4,8,0],[4,9,2],[4,10,4],[4,11,4],[4,12,2],[4,13,4],[4,14,4],[4,15,14],[4,16,12],[4,17,1],[4,18,8],[4,19,5],[4,20,3],[4,21,7],[4,22,3],[4,23,0],[5,0,2],[5,1,1],[5,2,0],[5,3,3],[5,4,0],[5,5,0],[5,6,0],[5,7,0],[5,8,2],[5,9,0],[5,10,4],[5,11,1],[5,12,5],[5,13,10],[5,14,5],[5,15,7],[5,16,11],[5,17,6],[5,18,0],[5,19,5],[5,20,3],[5,21,4],[5,22,2],[5,23,0],[6,0,1],[6,1,0],[6,2,0],[6,3,0],[6,4,0],[6,5,0],[6,6,0],[6,7,0],[6,8,0],[6,9,0],[6,10,1],[6,11,0],[6,12,2],[6,13,1],[6,14,3],[6,15,4],[6,16,0],[6,17,0],[6,18,0],[6,19,0],[6,20,1],[6,21,2],[6,22,2],[6,23,6]];
-option5 = {
-	backgroundColor: 'rgba(0,0,0,0)',
-    tooltip: {},
-    visualMap: {
-        max: 20,
-		show:false,
-        inRange: {
-            // color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-			color:['#313695',"#52C2D6","#fff"]
-        }
-    },
-	// globe:{
-	// 	top:0,
-	// 	bottom:0
-	// },
-    xAxis3D: {
-        type: 'category',
-        data: hours,
-		axisLabel: {
-		    margin: 10,
-		    textStyle: {
-		        color: '#52C2D6',
-		        fontSize: 12
-		    }
-		}
-		
-    },
-    yAxis3D: {
-        type: 'category',
-        data: days,
-		axisLabel: {
-		    margin: 10,
-		    textStyle: {
-		        color: '#52C2D6',
-		        fontSize: 12
-		    }
-		}
-    },
-    zAxis3D: {
-        type: 'value',
-		axisLabel: {
-		    margin: 10,
-		    textStyle: {
-		        color: '#52C2D6',
-		        fontSize: 12
-		    }
-		}
-    },
-    grid3D: {
-		top:"-10%",
-		bottom:"-10%",
-        boxWidth: 150,
-        boxDepth: 100,
-        viewControl: {
-            // projection: 'orthographic'
-        },
-        light: {
-            main: {
-                intensity: 1.2,
-                shadow: true
-            },
-            ambient: {
-                intensity: 0.3
-            }
-        }
-    },
-    series: [{
-        type: 'bar3D',
-        data: data.map(function (item) {
-            return {
-                value: [item[1], item[0], item[2]],
-            }
-        }),
-        shading: 'lambert',
-
-        label: {
-            textStyle: {
-                fontSize: 16,
-                borderWidth: 1,
-				color:"#52C2D6"
-            }
-        },
-
-        emphasis: {
-            label: {
-                textStyle: {
-                    fontSize: 20,
-                    color: '#52C2D6'
-                }
-            },
-            itemStyle: {
-                color: '#52C2D6'
-            }
-        }
-    }]
-}
