@@ -832,6 +832,7 @@ option5 = {
         axisLine: {
           show: true,
           lineStyle: {
+			opacity:0.1,
             width: 0,
             shadowBlur: 0,
             color: colorFormatOnChart(100,200)
@@ -870,12 +871,12 @@ option5 = {
           }
         },
         detail: {
-          borderColor: '#fff',
-          shadowColor: '#fff', //默认透明
+          // borderColor: '#fff',
+          // shadowColor: '#fff', //默认透明
           shadowBlur: 2,
           offsetCenter: [0, '-15%'], // x, y，单位px
           textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-            color: '#fff',
+            color: 'rgba(255,255,255,0.4)',
             fontSize: 62,
             fontWeight:'bold'
           },
@@ -885,6 +886,59 @@ option5 = {
           name: "今日报警",
           value: 100
         }]
+      },
+      {
+        name: '内部白色刻度',
+        type: 'gauge',
+        splitNumber: 8, //刻度数量
+        min: 0,
+        max: 100,
+        radius: '70%', //图表尺寸
+        center: ['50%', '80%'],
+        startAngle: 180,//刻度起始
+        endAngle: 0,//刻度结束
+        axisLine: {
+          show: true,
+          lineStyle: {
+            width: 0,
+            shadowBlur: 0,
+            color: [
+              [0.2, '#fff'],
+              [1, '#fff']
+            ]
+          }
+        },
+        axisTick: {
+          show: true,
+          lineStyle: {
+            color: 'auto',
+            width: 1
+          },
+          length: 5,
+          splitNumber: 2
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: 'auto',
+            width: 1
+          },
+          length: 8,
+          splitNumber: 10
+        },
+        axisLabel: {
+          show: false
+        },
+        pointer: { //仪表盘指针
+          show: false
+        },
+        title: {
+          show: false
+        },
+        detail: {
+          show:false
+        },
+        data: [{name:'',value:0}]
       }]
 };
 
