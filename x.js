@@ -30,7 +30,7 @@ var option1 = {
 			// center: ['50%', '50%'],
 			startAngle: 0,
 			endAngle: 359.9,
-			splitNumber: 65,
+			splitNumber: 50,
 			hoverAnimation: true,
 			axisTick: {
 				show: false
@@ -760,26 +760,26 @@ var x4=chart(option4, "x4");
 // op.series[1].data[1].value = 80;
 // myChart.setOption(op);
 
-waveChart(60,5,x1)
+waveChart(62,1,x1)
 function waveChart(num,range,chart){
 	var res=num;
 	var flag=1;
 	var option=chart.getOption();
 	setInterval(function(){
 		if(flag){
-			res+=2;
+			res+=1;
 			if(res>=num+range){
 				flag=0
 			}
 		}else{
-			res-=2;
+			res-=1;
 			if(res<=num-range){
 				flag=1
 			}
 		}
 		console.log(res);
-		option.series[1].data[0]=res
-		option.series[1].data[1]=(100-res)
+		option.series[1].data[0].value=res
+		option.series[1].data[1].value=(100-res);
 		chart.setOption(option)
 	},100)
 }
