@@ -1028,8 +1028,9 @@ function waveChart2(num,range,chart){
 				flag=1
 			}
 		}
-		// console.log(res);
-		option.series[0].data[2]=[res,res+31,res+15];
+		console.log(res);
+		option.series[2].data=[res,res+31,res+15];
+		// option.series[4].data=[res,res+31,res+15];
 		chart.setOption(option)
 	},100)
 }
