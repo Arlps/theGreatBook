@@ -1,4 +1,4 @@
-// 上左扇形图
+// 环形进度图
 var option1 = {
 	backgroundColor: 'rgba(0,0,0,0)',
 	tooltip: {
@@ -115,13 +115,12 @@ var option1 = {
 	]
 };
 
-// 进度图
-var maxData = 100;
+// 三进度条
 option2 = {
     backgroundColor: 'rgba(0,0,0,0)',
     tooltip: {},
     xAxis: {
-        max: maxData,
+        max: 100,
         splitLine: {
             show: false
         },
@@ -173,7 +172,7 @@ option2 = {
             },
             z: 0, //图层
             symbolRepeat: null,
-            symbolBoundingData: maxData,
+            symbolBoundingData: 100,
             // data: [61, 75, 35],
 			data: [100,100,100],
             animationEasing: 'elasticOut',
@@ -195,7 +194,7 @@ option2 = {
             },
             z: -20,
             symbolRepeat: null,
-            symbolBoundingData: maxData,
+            symbolBoundingData: 100,
             // data: [61, 75, 35],
 			data: [100,100,100],
             animationEasing: 'elasticOut',
@@ -216,7 +215,7 @@ option2 = {
             symbolMargin: '5%',
             symbolClip: true,
             symbolSize: 20,
-            symbolBoundingData: maxData,
+            symbolBoundingData: 100,
             data: [61, 75, 35],
             z: 99999999,
             animationEasing: 'elasticOut',
@@ -250,7 +249,7 @@ option2 = {
             symbolMargin: '5%',
             symbol: 'rect',
             symbolSize: 20,
-            symbolBoundingData: maxData,
+            symbolBoundingData: 100,
             data: [891, 1220, 660],
             z: 99999,
             animationEasing: 'elasticOut',
@@ -261,6 +260,7 @@ option2 = {
     ]
 };
 
+// 三仪表盘
 option3 = {
     backgroundColor: 'rgba(0,0,0,0)',
 	grid: {
@@ -546,13 +546,7 @@ option3 = {
 };
 
 
-placeHolderStyle = {
-    normal: {
-         color: "rgba(0,0,0,0)",
-        borderWidth: 0
-    },
-    
-};
+//多环形图
 option4 = {
     backgroundColor: 'rgba(0,0,0,0)',
     color: ['#2bdeff', '#1897fe', '#9f51ff', '#ff32e4', "#fd3744"],
@@ -602,7 +596,12 @@ option4 = {
         }, {
             value: 4,
             name: '',
-            itemStyle: placeHolderStyle
+            itemStyle: {
+				normal: {
+					 color: "rgba(0,0,0,0)",
+					borderWidth: 0
+				}
+			}
         }]
     }, {
         name: 'AUSTRALIA 02',
@@ -633,7 +632,12 @@ option4 = {
         }, {
             value: 7,
             name: '',
-            itemStyle: placeHolderStyle
+            itemStyle: {
+				normal: {
+					 color: "rgba(0,0,0,0)",
+					borderWidth: 0
+				}
+			}
         }]
     }, {
         name: 'AUSTRALIA 03',
@@ -661,7 +665,12 @@ option4 = {
         }, {
             value: 7,
             name: '',
-            itemStyle: placeHolderStyle
+            itemStyle: {
+				normal: {
+					 color: "rgba(0,0,0,0)",
+					borderWidth: 0
+				}
+			}
         }]
     }, {
         name: 'AUSTRALIA 04',
@@ -692,7 +701,12 @@ option4 = {
         }, {
             value: 7,
             name: '',
-            itemStyle: placeHolderStyle
+            itemStyle: {
+				normal: {
+					 color: "rgba(0,0,0,0)",
+					borderWidth: 0
+				}
+			}
         }]
     }, {
         name: 'AUSTRALIA 05',
@@ -723,40 +737,25 @@ option4 = {
         }, {
             value: 8,
             name: '',
-            itemStyle: placeHolderStyle
+            itemStyle: {
+				normal: {
+					 color: "rgba(0,0,0,0)",
+					borderWidth: 0
+				}
+			}
         }]
     }]
 };
 
 
-let {
-    date,
-    data
-} = {
-    date: [],
-    data: []
-}
-
-// 格式化时间
-function getTime() {
-    var ts = arguments[0] || 0;
-    var t, h, i, s;
-    t = ts ? new Date(ts * 1000) : new Date();
-    h = t.getHours();
-    i = t.getMinutes();
-    s = t.getSeconds();
-    // 可根据需要在这里定义时间格式
-    return (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
-}
-// 生成初始数据
-
+// 心电图
 var beats=[15,0,-13,140,-45];
+var date=[];
 for (var i = 0; i < 50; i++) {
     // data.push(Math.ceil(Math.random() * 800));
     date.push(getTime(Math.round(new Date().getTime() / 1000) - i))
 }
-
-data=[0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0]
+var data=[0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45]
 console.log(data)
 option5 = {
 	backgroundColor: 'rgba(0,0,0,0)',
@@ -949,8 +948,8 @@ var x3=chart(option3, "x3");
 var x4=chart(option4, "x4");
 var x5=chart(option5, "x5");
 
-//x5
-var beatsNum=0; beatsInterval=3,beatsTimes=0;
+//心电图动态变化
+var beatsNum=0; beatsInterval=1,beatsTimes=0;
 var o5=x5.getOption();
 setInterval(function() {
     data.shift();
@@ -967,7 +966,6 @@ setInterval(function() {
 		x5.setOption(o5)
 	}
 	beatsNum++;	
-	
     date.shift()
     date.push(getTime(Math.round(new Date().getTime() / 1000)))
     x5.setOption({
@@ -982,6 +980,7 @@ setInterval(function() {
 
 waveChart(62,1,x1)
 function waveChart(num,range,chart){
+	var x=0;
 	var res=num;
 	var flag=1;
 	var option=chart.getOption();
@@ -998,10 +997,15 @@ function waveChart(num,range,chart){
 			}
 		}
 		// console.log(res);
-		option.series[1].data[0].value=res
+		option.series[1].data[0].value=res;
 		option.series[1].data[1].value=(100-res);
+		x++;
+		// if(x%3==0){
+		// 	option.series[1].data[0].label.normal.formatter=res
+		// }
+		
 		chart.setOption(option)
-	},100)
+	},200)
 }
 
 waveChart2(44,2,x2)
@@ -1192,128 +1196,16 @@ function colorFormatOnChart(value,max){
       [1, '#F12C2C']]
   }
 }
-option6 = {
-     backgroundColor: '#0e202d',
-    series: [
-      {
-        name: '统计',
-        type: 'gauge',
-        splitNumber: 8, //刻度数量
-        min: 0,
-        max: 200,
-        radius: '80%', //图表尺寸
-        center: ['50%', '80%'],
-        startAngle: 180,//刻度起始
-        endAngle: 0,//刻度结束
-        axisLine: {
-          show: true,
-          lineStyle: {
-            width: 0,
-            shadowBlur: 0,
-            color: colorFormatOnChart(100,200)
-          }
-        },
-        axisTick: {
-          show: true,
-          lineStyle: {
-            color: 'auto',
-            width: 4
-          },
-          length: 22,
-          splitNumber: 2
-        },
-        splitLine: {
-          show: false,
-          length: 22,
-          lineStyle: {
-            color: 'auto',
-          }
-        },
-        axisLabel: {
-          show: false
-        },
-        pointer: { //仪表盘指针
-          show: 0,
-          length: '70%',
-          width: 2
-        },
-        title: {
-          show: true,
-          offsetCenter: [0, '5%'], // x, y，单位px
-          textStyle: {
-            color: '#ddd',
-            fontSize: 12
-          }
-        },
-        detail: {
-          borderColor: '#fff',
-          shadowColor: '#fff', //默认透明
-          shadowBlur: 2,
-          offsetCenter: [0, '-15%'], // x, y，单位px
-          textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-            color: '#fff',
-            fontSize: 62,
-            fontWeight:'bold'
-          },
-          formatter: '{value}'
-        },
-        data: [{
-          name: "今日报警",
-          value: 100
-        }]
-      },
-      {
-        name: '内部白色刻度',
-        type: 'gauge',
-        splitNumber: 8, //刻度数量
-        min: 0,
-        max: 100,
-        radius: '70%', //图表尺寸
-        center: ['50%', '80%'],
-        startAngle: 180,//刻度起始
-        endAngle: 0,//刻度结束
-        axisLine: {
-          show: true,
-          lineStyle: {
-            width: 0,
-            shadowBlur: 0,
-            color: [
-              [0.2, '#fff'],
-              [1, '#fff']
-            ]
-          }
-        },
-        axisTick: {
-          show: true,
-          lineStyle: {
-            color: 'auto',
-            width: 1
-          },
-          length: 5,
-          splitNumber: 2
-        },
-        splitLine: {
-          show: true,
-          lineStyle: {
-            color: 'auto',
-            width: 1
-          },
-          length: 8,
-          splitNumber: 10
-        },
-        axisLabel: {
-          show: false
-        },
-        pointer: { //仪表盘指针
-          show: false
-        },
-        title: {
-          show: false
-        },
-        detail: {
-          show:false
-        },
-        data: [{name:'',value:0}]
-      },
-    ]
-};
+
+// 格式化时间
+function getTime() {
+    var ts = arguments[0] || 0;
+    var t, h, i, s;
+    t = ts ? new Date(ts * 1000) : new Date();
+    h = t.getHours();
+    i = t.getMinutes();
+    s = t.getSeconds();
+    // 可根据需要在这里定义时间格式
+    return (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
+}
+// 生成初始数据
