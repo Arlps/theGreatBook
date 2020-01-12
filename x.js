@@ -116,7 +116,7 @@ var option1 = {
 };
 
 // 进度图
-var maxData = 2000;
+var maxData = 100;
 option2 = {
     backgroundColor: 'rgba(0,0,0,0)',
     tooltip: {},
@@ -174,7 +174,8 @@ option2 = {
             z: 0, //图层
             symbolRepeat: null,
             symbolBoundingData: maxData,
-            data: [891, 1220, 660],
+            // data: [61, 75, 35],
+			data: [100,100,100],
             animationEasing: 'elasticOut',
 
         },
@@ -195,12 +196,11 @@ option2 = {
             z: -20,
             symbolRepeat: null,
             symbolBoundingData: maxData,
-            data: [891, 1220, 660],
+            // data: [61, 75, 35],
+			data: [100,100,100],
             animationEasing: 'elasticOut',
 
         },
-
-
         {
             // current data
             type: 'pictorialBar',
@@ -217,7 +217,7 @@ option2 = {
             symbolClip: true,
             symbolSize: 20,
             symbolBoundingData: maxData,
-            data: [891, 1220, 660],
+            data: [61, 75, 35],
             z: 99999999,
             animationEasing: 'elasticOut',
             animationDelay: function(dataIndex, params) {
@@ -749,10 +749,15 @@ function getTime() {
     return (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
 }
 // 生成初始数据
+
+var beats=[0,0,0,0,0,0,15,0,-13,140,-45];
 for (var i = 0; i < 50; i++) {
-    data.push(Math.ceil(Math.random() * 800));
+    // data.push(Math.ceil(Math.random() * 800));
     date.push(getTime(Math.round(new Date().getTime() / 1000) - i))
 }
+
+data=[0,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,0,15,0,-13,140,-45,0,0]
+console.log(data)
 option5 = {
 	backgroundColor: 'rgba(0,0,0,0)',
     grid: [{
@@ -818,18 +823,23 @@ option5 = {
 };
 
 
-
-
-
 var x1=chart(option1, "x1");
 var x2=chart(option2, "x2");
 var x3=chart(option3, "x3");
 var x4=chart(option4, "x4");
 var x5=chart(option5, "x5");
 
+//x5
+var beatsNum=0;
 setInterval(function() {
+	
     data.shift();
-    data.push(Math.ceil(Math.random() * 800));
+    data.push(beats[beatsNum]);
+	beatsNum++;
+	if(beatsNum>beats.length){
+		beatsNum=0;
+	}
+	
     date.shift()
     date.push(getTime(Math.round(new Date().getTime() / 1000)))
     x5.setOption({
@@ -862,6 +872,29 @@ function waveChart(num,range,chart){
 		// console.log(res);
 		option.series[1].data[0].value=res
 		option.series[1].data[1].value=(100-res);
+		chart.setOption(option)
+	},100)
+}
+
+waveChart2(44,2,x2)
+function waveChart2(num,range,chart){
+	var res=num;
+	var flag=1;
+	var option=chart.getOption();
+	setInterval(function(){
+		if(flag){
+			res+=1;
+			if(res>=num+range){
+				flag=0
+			}
+		}else{
+			res-=1;
+			if(res<=num-range){
+				flag=1
+			}
+		}
+		// console.log(res);
+		option.series[0].data[2]=[res,res+31,res+15];
 		chart.setOption(option)
 	},100)
 }
