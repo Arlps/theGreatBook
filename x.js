@@ -950,7 +950,7 @@ var x4=chart(option4, "x4");
 var x5=chart(option5, "x5");
 
 //x5
-var beatsNum=0; beatsInterval=5,beatsTimes=0;
+var beatsNum=0; beatsInterval=3,beatsTimes=0;
 var o5=x5.getOption();
 setInterval(function() {
     data.shift();
