@@ -750,13 +750,13 @@ function getTime() {
 }
 // 生成初始数据
 
-var beats=[0,0,0,0,0,0,15,0,-13,140,-45];
+var beats=[0.2,0.2,0.2,0.2,0.2,0.2,15,0,-13,140,-45];
 for (var i = 0; i < 50; i++) {
     // data.push(Math.ceil(Math.random() * 800));
     date.push(getTime(Math.round(new Date().getTime() / 1000) - i))
 }
 
-data=[0,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,0,15,0,-13,140,-45,0,0]
+data=[0.2,0.2,0.2,0.2,0.2,0.2,15,0.2,-13,140,-45,0.2,0.2,0.2,0.2,0.2,0.2,15,0.2,-13,140,-45,0.2,0.2,0.2,0.2,0.2,0.2,15,0.2,-13,140,-45,0.2,0.2]
 console.log(data)
 option5 = {
 	backgroundColor: 'rgba(0,0,0,0)',
@@ -836,7 +836,7 @@ setInterval(function() {
     data.shift();
     data.push(beats[beatsNum]);
 	beatsNum++;
-	if(beatsNum>beats.length){
+	if(beatsNum>=beats.length){
 		beatsNum=0;
 	}
 	
