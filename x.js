@@ -878,7 +878,7 @@ option5 = {
           formatter: '{value}'
         },
         data: [{
-          name: "HEARTBEATS",
+          name: "",
           value: 100
         }]
       },
@@ -1007,6 +1007,7 @@ var x5=chart(option5, "x5");
 
 var o5=x5.getOption();
 setInterval(function() { 
+	var flag=0;
 	if(date.length==50){
 		data.shift()
 	}
@@ -1018,11 +1019,10 @@ setInterval(function() {
 	}else{
 		data.push(0)
 		beatsNum=-1;
-		beatsTimes=parseInt(60/((beats.length+beatsInterval)/10))
+		beatsTimes=parseInt(60/((beats.length+beatsInterval)/10));
+		flag=1;
 		// console.log(beatsTimes);
-		o5.series[1].data[0].value=beatsTimes;
-		o5.series[1].axisLine.lineStyle.color=colorFunc(beatsTimes/120)
-		x5.setOption(o5)
+		
 	}
 	beatsNum++;	
 	if(date.length==50){
@@ -1031,14 +1031,13 @@ setInterval(function() {
     
     date.push(getTime(Math.round(new Date().getTime() / 1000)));
 	// console.log(data)
-    x5.setOption({
-        series: [{
-            data: data
-        }],
-        xAxis: [{
-            data: date
-        }],
-    });
+	o5.series[0].data=data;
+	o5.xAxis.data=date;
+	if(flag){
+		o5.series[1].data[0].value=beatsTimes;
+		o5.series[1].axisLine.lineStyle.color=colorFunc(beatsTimes/120);
+	}
+	x5.setOption(o5);
 }, 100)
 
 waveChart(62,1,x1)
