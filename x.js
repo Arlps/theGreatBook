@@ -751,7 +751,7 @@ option4 = {
 // 心电图
 var beats=[15,0,-13,140,-45];
 var date=[],data=[];
-var beatsNum=0; beatsInterval=5,beatsTimes=0;
+var beatsNum=0; beatsInterval=5;
 option5 = {
 	backgroundColor: 'rgba(0,0,0,0)',
     grid: [{
@@ -1006,12 +1006,13 @@ var x5=chart(option5, "x5");
 //心电图动态变化
 
 var o5=x5.getOption();
+
+var beatsTimes=68;
+
+var timeGap=60*1000/(beats.length+beatsInterval)/beatsTimes;
 setInterval(function() { 
 	var flag=0;
-	if(date.length==50){
-		data.shift()
-	}
-    // data.shift();
+	if(date.length==50){ data.shift() }
 	if(beatsNum<beats.length){
 		data.push(beats[beatsNum]); 
 	}else if((beatsNum>=beats.length) && (beatsNum<(beats.length+beatsInterval-1))){
@@ -1019,26 +1020,21 @@ setInterval(function() {
 	}else{
 		data.push(0)
 		beatsNum=-1;
-		beatsTimes=parseInt(60/((beats.length+beatsInterval)/10));
+		// beatsTimes=parseInt(60/((beats.length+beatsInterval)/(1000/timeGap)));
 		flag=1;
-		// console.log(beatsTimes);
-		
 	}
 	beatsNum++;	
-	if(date.length==50){
-		date.shift()
-	}
-    
+	if(date.length==50){ date.shift() }
     date.push(getTime(Math.round(new Date().getTime() / 1000)));
-	// console.log(data)
+	// console.log(date)
 	o5.series[0].data=data;
-	o5.xAxis.data=date;
+	o5.xAxis[0].data=date;
 	if(flag){
 		o5.series[1].data[0].value=beatsTimes;
 		o5.series[1].axisLine.lineStyle.color=colorFunc(beatsTimes/120);
 	}
 	x5.setOption(o5);
-}, 100)
+}, timeGap)
 
 waveChart(62,1,x1)
 function waveChart(num,range,chart){
@@ -1171,7 +1167,7 @@ function animate2(id){
 
 
 // wave(100,5)
-function wave(num,range){
+function wave(num,range,interval){
 	var res=num;
 	var flag=1;
 	setInterval(function(){
@@ -1186,9 +1182,42 @@ function wave(num,range){
 				flag=1
 			}
 		}
-		console.log(res)
-	},50)
+		// console.log(res)
+	},interval)
 }
+
+
+
+// ease(50,20,5,function(res){
+// 	console.log(res*100)
+// })
+function ease(start,add,duration,callback){
+	var steps=10;
+	var idx=0;
+	var res=0;
+	var timer=setInterval(function(){
+		if(idx<steps){
+			res=easeInOut(idx,start,add,steps);
+			console.log(res.toFixed(2));
+			callback(res)
+		}else{
+			clearInterval("timer");
+		}
+		idx++;
+	},duration*1000/steps)
+}
+
+function easeInOut(t,b,c,d){
+	var x=t;
+	if ((t/=d/2) < 1) {
+		y=c/2*t*t*t + b;
+	} else{
+		y=c/2*((t-=2)*t*t + 2) + b;
+	}
+	return y;
+}
+
+
 
 
 // 心跳扇形图颜色进度处理
