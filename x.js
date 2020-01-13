@@ -965,6 +965,7 @@ optionX = {
     backgroundColor: '#000',
     globe: {
 		baseTexture:'x/earth.jpg',
+		globeRadius:50,
         // baseTexture: mapChart,
         heightTexture: 'x/bathymetry_bw_composite_4k.jpg',
 
@@ -983,16 +984,16 @@ optionX = {
             }
         },
 
-        // layers: [{
-        //     type: 'blend',
-        //     blendTo: 'emission',
-        //     texture: 'x/night.jpg'
-        // }, {
-        //     type: 'overlay',
-        //     texture:  'x/clouds.png',
-        //     shading: 'lambert',
-        //     distance: 5
-        // }]
+        layers: [{
+            type: 'blend',
+            blendTo: 'emission',
+            texture: 'x/night.jpg'
+        }, {
+            type: 'overlay',
+            texture:  'x/clouds.png',
+            shading: 'lambert',
+            distance: 5
+        }]
     },
     series: []
 }
