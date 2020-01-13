@@ -962,9 +962,10 @@ mapChart.setOption({
 $("canvas").show()
 
 optionX = {
-    backgroundColor: '#000',
+    backgroundColor: 'rgba(0,0,0,0)',
     globe: {
-		baseTexture:'x/earth2.jpg',
+		baseTexture:'x/earth.jpg',
+		// baseTexture:'x/earth2.jpg',
 		globeRadius:50,
         // baseTexture: mapChart,
         heightTexture: 'x/bathymetry_bw_composite_4k.jpg',
@@ -972,9 +973,11 @@ optionX = {
         displacementScale: 0.1,
 
         shading: 'realistic',
-
-        // environment: 'x/starfield.jpg'
-		environment: '#0F0E1C',
+		postEffect:{
+			enabled:true,
+			depthOfField:"enable"
+		},
+		environment: 'rgba(0,0,0,0)',
 
         light: {
             ambient: {

@@ -57,6 +57,15 @@ body{
     }
 }
 
+#earth{
+	position: fixed; width: 100%; height: 100%;
+	z-index: -100; opacity: 0.65;
+}
+
+@media screen and (max-width: 500px) {
+	#earth{height: 400px;width:400px; position: static; z-index: 0; opacity: 1;}
+}
+
 
 .panel-x{ border-color: #52C2D6; background: none; border: none;  }
 .panel{ 
