@@ -749,15 +749,9 @@ option4 = {
 
 
 // 心电图
-var beats=[15,0,-13,140,-45,0];
-var date=[];
-
-for (var i = 0; i < 50; i++) {
-    // data.push(Math.ceil(Math.random() * 800));
-    date.push(getTime(Math.round(new Date().getTime() / 1000) - i))
-}
-var data=[0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45,0,0,0,0,0,15,0,-13,140,-45]
-console.log(data)
+var beats=[15,0,-13,140,-45];
+var date=[],data=[];
+var beatsNum=0; beatsInterval=5,beatsTimes=0;
 option5 = {
 	backgroundColor: 'rgba(0,0,0,0)',
     grid: [{
@@ -1010,18 +1004,20 @@ var x4=chart(option4, "x4");
 var x5=chart(option5, "x5");
 
 //心电图动态变化
-var beatsNum=0; beatsInterval=1,beatsTimes=0;
+
 var o5=x5.getOption();
 setInterval(function() { 
-	// return;
-    data.shift();
-	if(beatsNum<=beats.length){
+	if(date.length==50){
+		data.shift()
+	}
+    // data.shift();
+	if(beatsNum<beats.length){
 		data.push(beats[beatsNum]); 
-	}else if((beatsNum>beats.length) && (beatsNum<(beats.length+beatsInterval))){
+	}else if((beatsNum>=beats.length) && (beatsNum<(beats.length+beatsInterval-1))){
 		data.push(0)
 	}else{
 		data.push(0)
-		beatsNum=0;
+		beatsNum=-1;
 		beatsTimes=parseInt(60/((beats.length+beatsInterval)/10))
 		// console.log(beatsTimes);
 		o5.series[1].data[0].value=beatsTimes;
@@ -1029,8 +1025,12 @@ setInterval(function() {
 		x5.setOption(o5)
 	}
 	beatsNum++;	
-    date.shift()
-    date.push(getTime(Math.round(new Date().getTime() / 1000)))
+	if(date.length==50){
+		date.shift()
+	}
+    
+    date.push(getTime(Math.round(new Date().getTime() / 1000)));
+	// console.log(data)
     x5.setOption({
         series: [{
             data: data
