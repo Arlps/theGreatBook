@@ -943,6 +943,61 @@ option5 = {
       }]
 };
 
+var earth_canvas = document.createElement('canvas');
+var mapChart = echarts.init(earth_canvas, null, {
+    width: 4096, height: 2048
+});
+mapChart.setOption({
+    series : [
+        {
+            type: 'map',
+            map: 'world',
+            // 绘制完整尺寸的 echarts 实例
+            top: 0, left: 0,
+            right: 0, bottom: 0,
+            boundingCoords: [[-180, 90], [180, -90]]
+        }
+    ]
+});
+$("canvas").show()
+
+optionX = {
+    backgroundColor: '#000',
+    globe: {
+		baseTexture:'x/earth.jpg',
+        // baseTexture: mapChart,
+        heightTexture: 'x/bathymetry_bw_composite_4k.jpg',
+
+        displacementScale: 0.1,
+
+        shading: 'realistic',
+
+        environment: 'x/starfield.jpg',
+
+        light: {
+            ambient: {
+                intensity: 1
+            },
+            main: {
+                intensity: 1.5
+            }
+        },
+
+        // layers: [{
+        //     type: 'blend',
+        //     blendTo: 'emission',
+        //     texture: 'x/night.jpg'
+        // }, {
+        //     type: 'overlay',
+        //     texture:  'x/clouds.png',
+        //     shading: 'lambert',
+        //     distance: 5
+        // }]
+    },
+    series: []
+}
+var earth=chart(optionX, "earth");
+
 var x1=chart(option1, "x1");
 var x2=chart(option2, "x2");
 var x3=chart(option3, "x3");
@@ -963,7 +1018,7 @@ setInterval(function() {
 		data.push(0)
 		beatsNum=0;
 		beatsTimes=parseInt(60/((beats.length+beatsInterval)/10))
-		console.log(beatsTimes);
+		// console.log(beatsTimes);
 		o5.series[1].data[0].value=beatsTimes;
 		o5.series[1].axisLine.lineStyle.color=colorFunc(beatsTimes/120)
 		x5.setOption(o5)
@@ -1028,7 +1083,7 @@ function waveChart2(num,range,chart){
 				flag=1
 			}
 		}
-		console.log(res);
+		// console.log(res);
 		option.series[2].data=[res,res+31,res+15];
 		// option.series[4].data=[res,res+31,res+15];
 		chart.setOption(option)
