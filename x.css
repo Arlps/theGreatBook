@@ -63,7 +63,8 @@ body{
 }
 
 @media screen and (max-width: 500px) {
-	#earth{height: 400px;width:400px; position: static; z-index: 0; opacity: 1;}
+	#earth{height: 400px;width:400px; position: static; z-index: 0; opacity: 1;
+	}
 }
 
 

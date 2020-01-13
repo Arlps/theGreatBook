@@ -1,5 +1,5 @@
 // 环形进度图
-var option1 = {
+option1 = {
 	backgroundColor: 'rgba(0,0,0,0)',
 	tooltip: {
 		trigger: "item"
@@ -212,9 +212,9 @@ option2 = {
                 }
             },
             symbolRepeat: 'fixed',
-            symbolMargin: '5%',
+            symbolMargin: '20%',
             symbolClip: true,
-            symbolSize: 20,
+            symbolSize: [5,20],
             symbolBoundingData: 100,
             data: [61, 75, 35],
             z: 99999999,
@@ -246,9 +246,9 @@ option2 = {
             },
             animationDuration: 0,
             symbolRepeat: 'fixed',
-            symbolMargin: '5%',
+            symbolMargin: '20%',
             symbol: 'rect',
-            symbolSize: 20,
+            symbolSize: [5,20],
             symbolBoundingData: 100,
             data: [891, 1220, 660],
             z: 99999,
@@ -1188,9 +1188,7 @@ function wave(num,range,interval){
 
 
 
-// ease(50,20,5,function(res){
-// 	console.log(res*100)
-// })
+ease(50,20,5);
 function ease(start,add,duration,callback){
 	var steps=10;
 	var idx=0;
@@ -1199,7 +1197,7 @@ function ease(start,add,duration,callback){
 		if(idx<steps){
 			res=easeInOut(idx,start,add,steps);
 			console.log(res.toFixed(2));
-			callback(res)
+			if(callback){callback(res)}
 		}else{
 			clearInterval("timer");
 		}
