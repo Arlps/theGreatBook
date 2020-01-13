@@ -964,7 +964,7 @@ $("canvas").show()
 optionX = {
     backgroundColor: '#000',
     globe: {
-		baseTexture:'x/earth.jpg',
+		baseTexture:'x/earth2.jpg',
 		globeRadius:50,
         // baseTexture: mapChart,
         heightTexture: 'x/bathymetry_bw_composite_4k.jpg',
@@ -973,7 +973,8 @@ optionX = {
 
         shading: 'realistic',
 
-        environment: 'x/starfield.jpg',
+        // environment: 'x/starfield.jpg'
+		environment: '#0F0E1C',
 
         light: {
             ambient: {
