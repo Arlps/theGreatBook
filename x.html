@@ -181,5 +181,12 @@
 				$("#loading").hide();
 			}
 		} 
+		
+		$.ajax({
+			url:"1.json",
+			success:function(res){
+				console.log(res)
+			}
+		})
 	</script>
 </html>

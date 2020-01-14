@@ -23,10 +23,11 @@ option1 = {
 			fontSize:12
 		}
 	}],
-	series: [{
+	series: [
+		{
 			name: "",
 			type: "gauge",
-			// radius: "50%",
+			radius: "70%",
 			// center: ['50%', '50%'],
 			startAngle: 0,
 			endAngle: 359.9,
@@ -36,10 +37,10 @@ option1 = {
 				show: false
 			},
 			splitLine: {
-				length: 20,
+				length: 12,
 				lineStyle: {
-					width: 3,
-					color: "#0D2331"
+					width: 2,
+					color: "#0F0E1C"
 				}
 			},
 			axisLabel: {
@@ -61,6 +62,30 @@ option1 = {
 				name: ""
 			}]
 		},
+		// {
+		// 	name: "",
+		// 	type: "pie",
+		// 	radius: ["60%", "70%"],
+		// 	center: ['50%', '50%'],
+		// 	silent: true,
+		// 	clockwise: true,
+		// 	startAngle: 0,
+		// 	z: 0,
+		// 	zlevel: 0,
+		// 	label: {
+		// 		normal: {
+		// 			position: "center",
+		// 
+		// 		}
+		// 	},
+		// 	splitLine: {
+		// 		length: 15,
+		// 		lineStyle: {
+		// 			width: 2,
+		// 			color: "#0F0E1C"
+		// 		}
+		// 	}
+		// },
 		{
 			name: "",
 			type: "pie",
@@ -75,6 +100,13 @@ option1 = {
 				normal: {
 					position: "center",
 
+				}
+			},
+			splitLine: {
+				length: 15,
+				lineStyle: {
+					width: 2,
+					color: "#0F0E1C"
 				}
 			},
 			data: [{
@@ -167,7 +199,7 @@ option2 = {
             symbolSize: ['102%', 24],
             itemStyle: {
                 normal: {
-                    color: 'rgba(54,215,182,0.27)'
+                    color: 'rgba(0,0,0,0.1)'
                 }
             },
             z: 0, //图层
@@ -188,8 +220,7 @@ option2 = {
             symbolSize: ['101%', 22],
             itemStyle: {
                 normal: {
-
-                    color: 'black'
+                    color: 'rgba(255,255,255,0.1)'
                 }
             },
             z: -20,
@@ -227,7 +258,7 @@ option2 = {
             type: 'pictorialBar',
             itemStyle: {
                 normal: {
-                    color: 'rgba(54,215,182,0.27)'
+                    color: 'rgba(255,255,255,0.1)'
                 }
             },
             label: {
@@ -995,7 +1026,7 @@ optionX = {
     },
     series: []
 }
-var earth=chart(optionX, "earth");
+// var earth=chart(optionX, "earth");
 
 var x1=chart(option1, "x1");
 var x2=chart(option2, "x2");
