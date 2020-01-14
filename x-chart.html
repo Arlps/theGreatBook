@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+		<title>chart</title>
+		<link rel="stylesheet" href="reset.css">
+		
+		<!-- <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script> -->
+		<script src="https://cdn.bootcss.com/echarts/4.1.0-rc.1/echarts.min.js"></script>
+		<!-- <script src="echarts/dark.js"></script> -->
+		
+		<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="echarts/echarts4.min.js"></script> -->
+		<script src="echarts/dark.js"></script>
+	</head>
+	<body>
+		<div id="x" style="width: 300px; height: 300px; border:1px solid #ccc"></div>
+	</body>
+
+	<script type="text/javascript">
+		var star = {
+			"白羊座": [
+				[
+					[0.30, 0.78],
+					[0.34, 0.66],
+					[0.28, 0.48],
+					[0.60, 0.26],
+					[0.65, 0.20],
+					[0.71, 0.23],
+					[0.70, 0.32],
+					[0.72, 0.36]
+				],
+				[
+					[0, 1, 2, 3, 4, 5],
+					[3, 6, 7]
+				]
+			],
+			"天秤座": [
+				[
+					[0.16, 0.67],
+					[0.34, 0.60],
+					[0.60, 0.27],
+					[0.75, 0.23],
+					[0.84, 0.47],
+					[0.63, 0.74],
+					[0.51, 0.78]
+				],
+				[
+					[0, 1, 2, 3, 4, 5, 6]
+				]
+			],
+			"摩羯座": [
+				[
+					[0.78, 0.21],
+					[0.78, 0.34],
+					[0.75, 0.45],
+					[0.75, 0.70],
+					[0.69, 0.78],
+					[0.31, 0.66],
+					[0.22, 0.49],
+					[0.30, 0.53],
+					[0.53, 0.54]
+				],
+				[
+					[0, 1, 2, 3, 4, 5, 6, 7, 8, 1]
+				]
+			],
+			"水瓶座": [
+				[
+					[0.45, 0.21],
+					[0.37, 0.35],
+					[0.27, 0.51],
+					[0.30, 0.58],
+					[0.29, 0.64],
+					[0.48, 0.79],
+					[0.51, 0.71],
+					[0.58, 0.68],
+					[0.73, 0.74],
+					[0.43, 0.53],
+					[0.53, 0.47]
+				],
+				[
+					[0, 1, 2, 3, 4, 5, 6, 7, 8],
+					[2, 9, 10]
+				]
+			],
+			"双鱼座": [
+				[
+					[0.28, 0.43],
+					[0.28, 0.53],
+					[0.36, 0.73],
+					[0.43, 0.78],
+					[0.50, 0.70],
+					[0.53, 0.62],
+					[0.57, 0.58],
+					[0.63, 0.43],
+					[0.67, 0.39],
+					[0.74, 0.39],
+					[0.77, 0.34],
+					[0.72, 0.30],
+					[0.75, 0.22],
+					[0.23, 0.50],
+					[0.66, 0.33]
+				],
+				[
+					[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+					[0, 13, 1],
+					[8, 14, 11]
+				]
+			],
+			"金牛座": [
+				[
+					[0.29, 0.21],
+					[0.39, 0.36],
+					[0.50, 0.51],
+					[0.50, 0.57],
+					[0.61, 0.63],
+					[0.77, 0.71],
+					[0.79, 0.79],
+					[0.22, 0.43],
+					[0.39, 0.57],
+					[0.60, 0.71],
+					[0.67, 0.76]
+				],
+				[
+					[0, 1, 2, 3, 4, 5, 6],
+					[7, 8, 3],
+					[4, 9, 10]
+				]
+			],
+			"双子座": [
+				[
+					[0.18, 0.37],
+					[0.25, 0.45],
+					[0.35, 0.55],
+					[0.39, 0.68],
+					[0.49, 0.77],
+					[0.51, 0.63],
+					[0.57, 0.78],
+					[0.28, 0.29],
+					[0.42, 0.32],
+					[0.61, 0.49],
+					[0.72, 0.60],
+					[0.83, 0.59],
+					[0.69, 0.75],
+					[0.22, 0.54],
+					[0.35, 0.43],
+					[0.48, 0.21]
+				],
+				[
+					[0, 1, 2, 3, 4],
+					[2, 5, 6],
+					[7, 8, 9, 10, 11],
+					[9, 12],
+					[13, 1, 14, 8, 15]
+				]
+			],
+			"巨蟹座": [
+				[
+					[0.16, 0.39],
+					[0.27, 0.36],
+					[0.52, 0.49],
+					[0.57, 0.65],
+					[0.83, 0.78],
+					[0.44, 0.21]
+				],
+				[
+					[0, 1, 2, 3, 4],
+					[2, 5]
+				]
+			],
+			"狮子座": [
+				[
+					[0.16, 0.75],
+					[0.23, 0.67],
+					[0.39, 0.77],
+					[0.71, 0.53],
+					[0.64, 0.39],
+					[0.55, 0.37],
+					[0.47, 0.27],
+					[0.54, 0.24],
+					[0.60, 0.27],
+					[0.85, 0.56]
+				],
+				[
+					[0, 1, 2, 3, 4, 5, 6, 7, 8],
+					[3, 9]
+				]
+			],
+			"处女座": [
+				[
+					[0.16, 0.59],
+					[0.35, 0.63],
+					[0.44, 0.70],
+					[0.62, 0.51],
+					[0.77, 0.46],
+					[0.84, 0.37],
+					[0.60, 0.42],
+					[0.65, 0.26],
+					[0.34, 0.75]
+				],
+				[
+					[0, 1, 2, 3, 4, 5],
+					[3, 6, 7],
+					[2, 8]
+				]
+			],
+			"天蝎座": [
+				[
+					[0.17, 0.50],
+					[0.28, 0.63],
+					[0.19, 0.70],
+					[0.28, 0.78],
+					[0.41, 0.77],
+					[0.49, 0.72],
+					[0.57, 0.55],
+					[0.59, 0.44],
+					[0.69, 0.31],
+					[0.74, 0.21],
+					[0.82, 0.29],
+					[0.79, 0.44],
+					[0.73, 0.50],
+					[0.38, 0.47]
+				],
+				[
+					[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+					[1, 13],
+					[8, 11]
+				]
+			],
+			"射手座": [
+				[
+					[0.22, 0.66],
+					[0.24, 0.51],
+					[0.45, 0.40],
+					[0.54, 0.37],
+					[0.59, 0.43],
+					[0.66, 0.50],
+					[0.63, 0.60],
+					[0.66, 0.67],
+					[0.74, 0.53],
+					[0.77, 0.39],
+					[0.49, 0.47],
+					[0.29, 0.68],
+					[0.30, 0.78],
+					[0.48, 0.21],
+					[0.52, 0.27],
+					[0.59, 0.29]
+				],
+				[
+					[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+					[2, 10, 11, 12],
+					[10, 4],
+					[13, 14, 15, 3],
+					[14, 3]
+				]
+			]
+		};
+		
+		var keyarr=[];
+		for(var key in star){
+			keyarr.push(key)
+		}
+		function makeData(key){
+			var arr=star[key];
+			var data=[],link=[];
+			for (var i = 0; i < arr[0].length; i++) {
+				data.push({
+					x:arr[0][i][0],
+					y:arr[0][i][1]
+				})
+			}
+			for (var i = 0; i < arr[1].length; i++) {
+				for (var j = 0; j <arr[1][i].length-1; j++) {
+					link.push({
+						source:arr[1][i][j],
+						target:arr[1][i][j+1]
+					})
+				}
+			}
+			
+			return {
+				data:data,
+				link:link
+			}
+		}
+		
+		
+		
+		var xxx=makeData(keyarr[0]);
+		
+			
+		
+		option2 = {
+		    title: {
+		        text: 'Graph 简单示例'
+		    },
+		    tooltip: {},
+		    animationDurationUpdate: 1500,
+		    animationEasingUpdate: 'quinticInOut',
+		    series: [
+		        {
+		            type: 'graph',
+		            layout: 'none',
+		            symbolSize: 10,
+		            roam: true,
+		            label: {
+		                show: true
+		            },
+		            // edgeSymbol: ['circle', 'arrow'],
+		            edgeSymbolSize: [4, 10],
+		            edgeLabel: {
+		                fontSize: 20
+		            },
+		            data: xxx.data,
+		            // links: [],
+		            links: xxx.link,
+		            lineStyle: {
+		                opacity: 0.9,
+		                width: 2,
+		                curveness: 0
+		            }
+		        }
+		    ]
+		};
+	
+		var mychart=chart(option2,"x");
+		var o=mychart.getOption();
+		var idx=0;
+		setInterval(function(){
+			if(idx>=keyarr.length){
+				idx=0
+			}
+			var data=makeData(keyarr[idx]);
+			idx++;
+			o.title.text=keyarr[idx];
+			o.series[0].data=data.data;
+			o.series[0].links=data.link;
+			mychart.setOption(o);
+		},2000)
+		
+		function chart(option, id) {
+		
+			// var mychart = echarts.init(document.getElementById(id));
+			var mychart = echarts.init(document.getElementById(id), 'dark');
+			mychart.setOption(option);
+			console.log(mychart)
+			return mychart;
+		}
+	</script>
+</html>

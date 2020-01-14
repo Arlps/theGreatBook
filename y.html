@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="reset.css">
 		<!-- <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7/dist/css/bootstrap.min.css" />-->
 		 <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="x.css"/>
+		<link rel="stylesheet" type="text/css" href="y.css"/>
 		<!-- <script src="jquery.min.js" type="text/javascript" charset="utf-8"></script> -->
 		<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
 		<!-- <script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script> -->
@@ -27,12 +27,12 @@
 				<div class="col-sm-3">
 					<div class="panel panel-x">
 					    <div class="系统指标 System Index">
-					        系统指标 System Index
+					        整体预览 OVERALL PREVIEW
 					    </div>
 					    <div class="panel-body x">
 					        <ul id="xlist">
-								<li>AUSTRALIA 01</li>
-								<li>AUSTRALIA 02</li>
+								<li>2020-01-14 16:14</li>
+								<li>10-23℃ clear to overcast</li>
 								<li>AUSTRALIA 03</li>
 								<li>AUSTRALIA 04</li>
 								<li>AUSTRALIA 05</li>
@@ -172,7 +172,7 @@
 		</div>
 	</body>
 	<div id="loading" ><span class="glyphicon glyphicon-plus"></span></div>
-	<script src="x.js"></script>
+	<script src="y.js"></script>
 	<script type="text/javascript">
 		// $("#loading").show();
 		document.onreadystatechange = function(){
@@ -182,15 +182,7 @@
 			}
 		} 
 		
-		setTimeout(function(){
-			$.ajax({
-				url:"1.json",
-				success:function(res){
-					$("body").html(res)
-				}
-			})
-			
-		},10000)
+		
 		
 	</script>
 </html>
