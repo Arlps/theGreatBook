@@ -968,6 +968,48 @@ option5 = {
       }]
 };
 
+
+optionX = {
+    backgroundColor: 'rgba(0,0,0,0)',
+    globe: {
+		baseTexture:'x/earth.jpg',
+		// baseTexture:'x/earth2.jpg',
+		globeRadius:50,
+        // baseTexture: mapChart,
+        heightTexture: 'x/bathymetry_bw_composite_4k.jpg',
+
+        displacementScale: 0.1,
+
+        shading: 'realistic',
+		postEffect:{
+			enabled:true,
+			depthOfField:"enable"
+		},
+		environment: 'rgba(0,0,0,0)',
+
+        light: {
+            ambient: {
+                intensity: 1
+            },
+            main: {
+                intensity: 1.5
+            }
+        },
+
+        layers: [{
+            type: 'blend',
+            blendTo: 'emission',
+            texture: 'x/night.jpg'
+        }, {
+            type: 'overlay',
+            texture:  'x/clouds.png',
+            shading: 'lambert',
+            distance: 5
+        }]
+    },
+    series: []
+}
+
 var constellation = {
 	"摩羯座": [
 		[
@@ -1253,7 +1295,7 @@ var constellation = {
 			"11-23～12-21"
 		]
 	]
-	};
+};
 
 var star_key=[];
 for(var key in constellation){
@@ -1283,97 +1325,77 @@ function makeStarData(key){
 	}
 }
 
-
-
 var star_data=makeStarData(star_key[0]);
 
-optionX = {
+star_option = {
+	backgroundColor: 'rgba(0,0,0,0)',
 	title: {
-	    text: star_data.name
+		text: star_data.name
 	},
-    backgroundColor: 'rgba(0,0,0,0)',
-    globe: {
-		baseTexture:'x/earth.jpg',
-		// baseTexture:'x/earth2.jpg',
-		globeRadius:50,
-        // baseTexture: mapChart,
-        heightTexture: 'x/bathymetry_bw_composite_4k.jpg',
-
-        displacementScale: 0.1,
-
-        shading: 'realistic',
-		postEffect:{
-			enabled:true,
-			depthOfField:"enable"
-		},
-		environment: 'rgba(0,0,0,0)',
-
-        light: {
-            ambient: {
-                intensity: 1
-            },
-            main: {
-                intensity: 1.5
-            }
-        },
-
-        layers: [{
-            type: 'blend',
-            blendTo: 'emission',
-            texture: 'x/night.jpg'
-        }, {
-            type: 'overlay',
-            texture:  'x/clouds.png',
-            shading: 'lambert',
-            distance: 5
-        }]
-    },
-    series: [{
-		type: 'graph',
-		layout: 'none',
-		symbolSize: 10,
-		roam: true,
-		label: {
-			show: true
-		},
-		edgeSymbolSize: [4, 10],
-		edgeLabel: {
-			fontSize: 20
-		},
-		data: star_data.data,
-		links: star_data.link,
-		lineStyle: {
-			opacity: 0.9,
-			width: 1.5,
-			curveness: 0
-		},
-		"itemStyle": {
-			"normal": {
-				"color": "#72D3F9",
-				//   "borderWidth": 30,
-				"shadowBlur": 15,
-				"shadowColor": "#72D3F9",
-				//   color: '#66ff00',
-				borderColor: 'rgba(255, 255, 255, 0.2)',
-				borderWidth: 6
+	tooltip: {},
+	animationDurationUpdate: 1500,
+	animationEasingUpdate: 'quinticInOut',
+	series: [
+		{
+			type: 'graph',
+			layout: 'none',
+			symbolSize: 10,
+			roam: true,
+			label: {
+				show: true
+			},
+			edgeSymbolSize: [4, 10],
+			edgeLabel: {
+				fontSize: 20
+			},
+			data: star_data.data,
+			links: star_data.link,
+			lineStyle: {
+				opacity: 0.9,
+				width: 1.5,
+				curveness: 0
+			},
+			"itemStyle": {
+				"normal": {
+					"color": "#72D3F9",
+					//   "borderWidth": 30,
+					"shadowBlur": 15,
+					"shadowColor": "#72D3F9",
+					//   color: '#66ff00',
+					borderColor: 'rgba(255, 255, 255, 0.2)',
+					borderWidth: 6
+				}
 			}
 		}
-	}]
-}
-var earth=chart(optionX, "earth");
+	]
+};
 
-// 
+
+var earth=chart(optionX, "earth");
 var x1=chart(option1, "x1");
 var x2=chart(option2, "x2");
 var x3=chart(option3, "x3");
-var x4=chart(option4, "x4");
+// var x4=chart(option4, "x4");
 var x5=chart(option5, "x5");
+var star=chart(star_option,"x4");
+
+//星座
+var star_idx=1;
+setInterval(function(){
+	if(star_idx>=star_key.length){
+		star_idx=0;
+	}
+	var data=makeStarData(star_key[star_idx]);
+	star_option.title.text=data.name;
+	star_option.series[0].data=data.data;
+	star_option.series[0].links=data.link;
+	star.setOption(star_option);
+	star_idx++;
+},2000)
 
 //心电图动态变化
 var o5=x5.getOption();
-
 var beatsTimes=68;
-
 var timeGap=60*1000/(beats.length+beatsInterval)/beatsTimes;
 setInterval(function() { 
 	var flag=0;
