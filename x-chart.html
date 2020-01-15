@@ -19,7 +19,7 @@
 	</body>
 
 	<script type="text/javascript">
-		var star = {
+		var constellation = {
 			"白羊座": [
 				[
 					[0.30, 0.78],
@@ -258,12 +258,12 @@
 			]
 		};
 		
-		var keyarr=[];
-		for(var key in star){
-			keyarr.push(key)
+		var star_key=[];
+		for(var key in constellation){
+			star_key.push(key)
 		}
-		function makeData(key){
-			var arr=star[key];
+		function makeStarData(key){
+			var arr=constellation[key];
 			var data=[],link=[];
 			for (var i = 0; i < arr[0].length; i++) {
 				data.push({
@@ -279,8 +279,8 @@
 					})
 				}
 			}
-			
 			return {
+				name:key,
 				data:data,
 				link:link
 			}
@@ -288,13 +288,11 @@
 		
 		
 		
-		var xxx=makeData(keyarr[0]);
+		var star_data=makeStarData(star_key[0]);
 		
-			
-		
-		option2 = {
+		star_option = {
 		    title: {
-		        text: 'Graph 简单示例'
+		        text: star_data.name
 		    },
 		    tooltip: {},
 		    animationDurationUpdate: 1500,
@@ -313,9 +311,8 @@
 		            edgeLabel: {
 		                fontSize: 20
 		            },
-		            data: xxx.data,
-		            // links: [],
-		            links: xxx.link,
+		            data: star_data.data,
+		            links: star_data.link,
 		            lineStyle: {
 		                opacity: 0.9,
 		                width: 2,
@@ -325,24 +322,22 @@
 		    ]
 		};
 	
-		var mychart=chart(option2,"x");
-		var o=mychart.getOption();
-		var idx=0;
+		var star=chart(star_option,"x");
+		// var star_option=star.getOption();
+		var star_idx=1;
 		setInterval(function(){
-			if(idx>=keyarr.length){
-				idx=0
+			if(star_idx>=star_key.length){
+				star_idx=0;
 			}
-			var data=makeData(keyarr[idx]);
-			idx++;
-			o.title.text=keyarr[idx];
-			o.series[0].data=data.data;
-			o.series[0].links=data.link;
-			mychart.setOption(o);
+			var data=makeStarData(star_key[star_idx]);
+			star_option.title.text=data.name;
+			star_option.series[0].data=data.data;
+			star_option.series[0].links=data.link;
+			star.setOption(star_option);
+			star_idx++;
 		},2000)
 		
 		function chart(option, id) {
-		
-			// var mychart = echarts.init(document.getElementById(id));
 			var mychart = echarts.init(document.getElementById(id), 'dark');
 			mychart.setOption(option);
 			console.log(mychart)

@@ -1026,7 +1026,7 @@ optionX = {
     },
     series: []
 }
-// var earth=chart(optionX, "earth");
+var earth=chart(optionX, "earth");
 // 
 var x1=chart(option1, "x1");
 var x2=chart(option2, "x2");
