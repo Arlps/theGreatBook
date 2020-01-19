@@ -1022,10 +1022,10 @@ optionX = {
 		type: 'scatter3D',
 		coordinateSystem: 'globe',
 		blendMode: 'lighter',
-		symbolSize: 2,
+		symbolSize: 2.5,
 		itemStyle: {
 			color: 'rgb(50, 50, 150)',
-			opacity: 1
+			opacity: 0.3
 		},
 		data: population
 	}]
@@ -1392,7 +1392,10 @@ star_option = {
 };
 
 
-var earth=chart(optionX, "earth");
+setTimeout(function(){
+	var earth=chart(optionX, "earth");
+},5000)
+
 var x1=chart(option1, "x1");
 var x2=chart(option2, "x2");
 var x3=chart(option3, "x3");
