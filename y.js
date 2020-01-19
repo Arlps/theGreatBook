@@ -968,7 +968,18 @@ option5 = {
       }]
 };
 
-
+var population;
+$.ajax({
+	url:"data/population.json",
+	async:false,
+	success:function(res){
+		population = res.filter(function (dataItem) {
+		    return dataItem[2] > 0;
+		}).map(function (dataItem) {
+		    return [dataItem[0], dataItem[1], Math.sqrt(dataItem[2])];
+		});
+	}
+});
 optionX = {
     backgroundColor: 'rgba(0,0,0,0)',
     globe: {
@@ -1007,7 +1018,17 @@ optionX = {
             distance: 5
         }]
     },
-    series: []
+    series: [{
+		type: 'scatter3D',
+		coordinateSystem: 'globe',
+		blendMode: 'lighter',
+		symbolSize: 2,
+		itemStyle: {
+			color: 'rgb(50, 50, 150)',
+			opacity: 1
+		},
+		data: population
+	}]
 }
 
 var constellation = {

@@ -32,13 +32,12 @@ body{
 	animation:xxx 1s infinite;
 }
 
-
+5770
 @keyframes xxx
 {
 	from {transform:rotateZ(0deg)}
 	to {transform:rotateZ(360deg)}
 }
-
 #mainView{
 	background: url(x/left.png) left center no-repeat,url(x/right.png) right center no-repeat;
 	background-size: auto 100%;
