@@ -1022,10 +1022,10 @@ optionX = {
 		type: 'scatter3D',
 		coordinateSystem: 'globe',
 		blendMode: 'lighter',
-		symbolSize: 2.5,
+		symbolSize: 2,
 		itemStyle: {
 			color: 'rgb(50, 50, 150)',
-			opacity: 0.3
+			opacity: 1
 		},
 		data: population
 	}]
