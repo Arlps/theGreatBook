@@ -576,7 +576,6 @@ option3 = {
     ]
 };
 
-
 //多环形图
 option4 = {
     backgroundColor: 'rgba(0,0,0,0)',
@@ -777,7 +776,6 @@ option4 = {
         }]
     }]
 };
-
 
 // 心电图
 var beats=[15,0,-13,140,-45];
@@ -1322,6 +1320,7 @@ var star_key=[];
 for(var key in constellation){
 	star_key.push(key)
 }
+
 function makeStarData(key){
 	var arr=constellation[key];
 	var data=[],link=[];
@@ -1450,7 +1449,6 @@ star_option = {
 	]
 };
 
-
 setTimeout(function(){
 	var earth=chart(optionX, "earth");
 },5000)
@@ -1472,6 +1470,7 @@ setInterval(function(){
 	star_option.title.text=data.name;
 	star_option.series[0].data=data.data;
 	star_option.series[0].links=data.link;
+	star_option.series[1].data[0].value=randArr(6);
 	star.setOption(star_option);
 	star_idx++;
 },2000)
@@ -1570,8 +1569,6 @@ function chart(option, id) {
 	return mychart;
 }
 
-
-
 xtable("xtable1");
 xtable("xtable2")
 function xtable(id){
@@ -1634,8 +1631,6 @@ function animate2(id){
 	},3500)
 }
 
-
-
 // wave(100,5)
 function wave(num,range,interval){
 	var res=num;
@@ -1655,8 +1650,6 @@ function wave(num,range,interval){
 		// console.log(res)
 	},interval)
 }
-
-
 
 ease(50,20,5);
 function ease(start,add,duration,callback){
@@ -1685,9 +1678,6 @@ function easeInOut(t,b,c,d){
 	return y;
 }
 
-
-
-
 // 心跳扇形图颜色进度处理
 function colorFunc(value){
 	var colorRange=[[0.1, '#17D5F7'],[0.2, '#1BF0AC'],[0.3, '#3ED25E'],[0.4, '#A2DA2A'],[0.5, '#DBF743'],[0.6, '#F4DE48'],[0.7, '#F3B92F'],[0.8, '#F5841F'],[0.9, '#F15041'],[1, '#F12C2C']];
@@ -1699,8 +1689,6 @@ function colorFunc(value){
 	// console.log(arr)
 	return arr;
 }
-
-
 
 // 格式化时间
 function getTime() {
@@ -1714,3 +1702,12 @@ function getTime() {
     return (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
 }
 // 生成初始数据
+
+function randArr(num){
+	var arr=[];
+	for (var i = 0; i < num; i++) {
+		arr.push(40+parseInt(Math.random()*60))
+	}
+	console.log(arr)
+	return arr;
+}

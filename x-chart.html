@@ -25,12 +25,12 @@
 			    radar: [
 			        {
 			            indicator: [
-			                { text: 'INDEX VALUE', max: 150 },
-			                { text: 'INDEX VALUE', max: 150 },
-			                { text: 'INDEX VALUE', max: 150 },
-			                { text: 'INDEX VALUE', max: 120 },
-			                { text: 'INDEX VALUE', max: 108 },
-			                { text: 'INDEX VALUE', max: 72 }
+			                { text: 'INDEX VALUE', max: 100 },
+			                { text: 'INDEX VALUE', max: 100 },
+			                { text: 'INDEX VALUE', max: 100 },
+			                { text: 'INDEX VALUE', max: 100 },
+			                { text: 'INDEX VALUE', max: 100 },
+			                { text: 'INDEX VALUE', max: 100 }
 			            ],
 			            center: ['50%', '50%'],
 			            radius: 120
@@ -550,10 +550,19 @@
 				star_option.title.text=data.name;
 				star_option.series[0].data=data.data;
 				star_option.series[0].links=data.link;
+				star_option.series[1].data[0].value=randArr(6);
 				star.setOption(star_option);
 				star_idx++;
 			},2000)
 			
+		}
+		function randArr(num){
+			var arr=[];
+			for (var i = 0; i < num; i++) {
+				arr.push(parseInt(Math.random()*100))
+			}
+			console.log(arr)
+			return arr;
 		}
 
 		function chart(option, id) {
