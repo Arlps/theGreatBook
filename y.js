@@ -1353,9 +1353,44 @@ star_option = {
 	title: {
 		text: star_data.name
 	},
+	grid:{
+		top:"20%",bottom:"20%",left:"20%",right:"20%",
+		containLabel:true
+	},
 	tooltip: {},
 	animationDurationUpdate: 1500,
 	animationEasingUpdate: 'quinticInOut',
+	radar: [
+	    {
+	        indicator: [
+	            { text: 'INDEX', max: 150 },
+	            { text: 'INDEX', max: 150 },
+	            { text: 'INDEX', max: 150 },
+	            { text: 'INDEX', max: 120 },
+	            { text: 'INDEX', max: 108 },
+	            { text: 'INDEX', max: 72 }
+	        ],
+	        center: ['50%', '50%'],
+	        radius: 80,
+			splitLine: {
+				lineStyle: {
+					color: [
+						'rgba(238, 197, 102, 0.1)', 'rgba(238, 197, 102, 0.2)',
+						'rgba(238, 197, 102, 0.4)', 'rgba(238, 197, 102, 0.6)',
+						'rgba(238, 197, 102, 0.8)', 'rgba(238, 197, 102, 1)'
+					].reverse()
+				}
+			},
+			splitArea: {
+				show: false
+			},
+			axisLine: {
+				lineStyle: {
+					color: 'rgba(238, 197, 102, 0.5)'
+				}
+			}
+	    }
+	],
 	series: [
 		{
 			type: 'graph',
@@ -1387,6 +1422,30 @@ star_option = {
 					borderWidth: 6
 				}
 			}
+		},
+		{
+			name: 'AUSTRALIA',
+			type: 'radar',
+			radarIndex: 0,
+			data: [
+				{
+					value: [90, 113, 140, 30, 70, 60],
+					name: '123',
+					areaStyle: {
+						opacity: 0.5,
+						color: new echarts.graphic.RadialGradient(0.5, 0.5, 1, [
+							{
+								color: '#B8D3E4',
+								offset: 0
+							},
+							{
+								color: '#72ACD1',
+								offset: 1
+							}
+						])
+					}
+				}
+			]
 		}
 	]
 };
