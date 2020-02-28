@@ -801,6 +801,7 @@ option5 = {
     xAxis: [{
         type: 'category',
         boundaryGap: false,
+		interval:5,
         axisLine: {
             lineStyle: {
                 color: '#57617B'
@@ -1362,12 +1363,12 @@ star_option = {
 	radar: [
 	    {
 	        indicator: [
-	            { text: 'INDEX', max: 150 },
-	            { text: 'INDEX', max: 150 },
-	            { text: 'INDEX', max: 150 },
-	            { text: 'INDEX', max: 120 },
-	            { text: 'INDEX', max: 108 },
-	            { text: 'INDEX', max: 72 }
+	            { text: '爱情', max: 150 },
+	            { text: '事业', max: 150 },
+	            { text: '健康', max: 150 },
+	            { text: '心情', max: 120 },
+	            { text: '运气', max: 108 },
+	            { text: '动力', max: 72 }
 	        ],
 	        center: ['50%', '50%'],
 	        radius: 80,
@@ -1406,7 +1407,7 @@ star_option = {
 			data: star_data.data,
 			links: star_data.link,
 			lineStyle: {
-				opacity: 0.9,
+				opacity: 0.2,
 				width: 1.5,
 				curveness: 0
 			},
@@ -1431,7 +1432,7 @@ star_option = {
 					value: [90, 113, 140, 30, 70, 60],
 					name: '123',
 					areaStyle: {
-						opacity: 0.5,
+						opacity: 0.7,
 						color: new echarts.graphic.RadialGradient(0.5, 0.5, 1, [
 							{
 								color: '#B8D3E4',
@@ -1450,7 +1451,7 @@ star_option = {
 };
 
 setTimeout(function(){
-	var earth=chart(optionX, "earth");
+	// var earth=chart(optionX, "earth");
 },5000)
 
 var x1=chart(option1, "x1");
@@ -1481,7 +1482,7 @@ var beatsTimes=68;
 var timeGap=60*1000/(beats.length+beatsInterval)/beatsTimes;
 setInterval(function() { 
 	var flag=0;
-	if(date.length==50){ data.shift() }
+	
 	if(beatsNum<beats.length){
 		data.push(beats[beatsNum]); 
 	}else if((beatsNum>=beats.length) && (beatsNum<(beats.length+beatsInterval-1))){
@@ -1493,11 +1494,19 @@ setInterval(function() {
 		flag=1;
 	}
 	beatsNum++;	
-	if(date.length==50){ date.shift() }
-    date.push(getTime(Math.round(new Date().getTime() / 1000)));
+	
+    // date.push(getTime(Math.round(new Date().getTime() / 1000)));
+	date.push(parseInt(Math.random()*10000));
+	
+	if(data.length>=50){ data.shift() }
+	if(date.length>=50){ date.shift() }
 	// console.log(date)
 	o5.series[0].data=data;
 	o5.xAxis[0].data=date;
+	// console.log(data);
+	// console.log(date)
+	
+	//刻度表变化
 	if(flag){
 		o5.series[1].data[0].value=beatsTimes;
 		o5.series[1].axisLine.lineStyle.color=colorFunc(beatsTimes/120);
@@ -1535,7 +1544,7 @@ function waveChart(num,range,chart){
 	},200)
 }
 
-waveChart2(44,2,x2)
+waveChart2(44,0.8,x2)
 function waveChart2(num,range,chart){
 	var res=num;
 	var flag=1;
@@ -1556,7 +1565,7 @@ function waveChart2(num,range,chart){
 		option.series[2].data=[res,res+31,res+15];
 		// option.series[4].data=[res,res+31,res+15];
 		chart.setOption(option)
-	},100)
+	},300)
 }
 
 function chart(option, id) {
@@ -1659,7 +1668,7 @@ function ease(start,add,duration,callback){
 	var timer=setInterval(function(){
 		if(idx<steps){
 			res=easeInOut(idx,start,add,steps);
-			console.log(res.toFixed(2));
+			// console.log(res.toFixed(2));
 			if(callback){callback(res)}
 		}else{
 			clearInterval("timer");
@@ -1708,6 +1717,6 @@ function randArr(num){
 	for (var i = 0; i < num; i++) {
 		arr.push(40+parseInt(Math.random()*60))
 	}
-	console.log(arr)
+	// console.log(arr)
 	return arr;
 }

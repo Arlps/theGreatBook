@@ -6,8 +6,8 @@ html,body{ height: 100%;}
 
 body{
 	/* background: url(x/bg.jpg);background-size: 100% 100% ; */
-	background:url(x/net.png);
-	background-color: #0F0E1C;
+	/* background:url(x/net.png); */
+	/* background-color: #0F0E1C; */
 	 padding-top: 20px;
 	font-family: "lcdD"; color: #52C2D5; color: #25B4D2; text-shadow: 0px 0px 4px #52C2D6;
 }
@@ -17,7 +17,8 @@ body{
 		background-image: url(x/net.png);
 		background-image:none;
 		background-size:50% 50%;
-		background-color: #0F0E1C; height: auto; 
+		/* background-color: #0F0E1C; */
+		height: auto; 
 	}
 }
 
@@ -99,13 +100,13 @@ body{
 	padding: 10px 28px;
 }
 #xlist li:nth-child(3){ 
-	font-size: 22px;color: #FDAC00;
+	font-size: 18px;color: #FDAC00;
 	background: url(x/arrow2.png) center center no-repeat;
 	background-size: 100% 100%;
 	transition: 1s;
 }
 #xlist li:nth-child(1),#xlist li:nth-child(5){ opacity: 0.3; background-size: 70% 70%;}
-#xlist li:nth-child(2),#xlist li:nth-child(4){ opacity: 0.65; background-size: 82% 82%; font-size: 20px;}}
+#xlist li:nth-child(2),#xlist li:nth-child(4){ opacity: 0.65; background-size: 82% 82%; font-size: 15px;}}
 #xlist li:nth-child(6){ opacity: 0.1;}
 
 #xlist .point{
