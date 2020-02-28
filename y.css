@@ -6,8 +6,8 @@ html,body{ height: 100%;}
 
 body{
 	/* background: url(x/bg.jpg);background-size: 100% 100% ; */
-	/* background:url(x/net.png); */
-	/* background-color: #0F0E1C; */
+	background:url(x/net.png);
+	background-color: #0F0E1C;
 	 padding-top: 20px;
 	font-family: "lcdD"; color: #52C2D5; color: #25B4D2; text-shadow: 0px 0px 4px #52C2D6;
 }
@@ -17,7 +17,7 @@ body{
 		background-image: url(x/net.png);
 		background-image:none;
 		background-size:50% 50%;
-		/* background-color: #0F0E1C; */
+		background-color: #0F0E1C;
 		height: auto; 
 	}
 }
@@ -90,14 +90,14 @@ body{
 .num{color: #FDAC00;text-shadow: 0px 0px 4px #FDAC00;}
 
 #xlist{ 
-	height: 230px; padding: 0 20px;
+	height: 230px; padding: 20px 30px;
 	overflow: hidden; 
 }
 #xlist li{ 
 	font-size: 16px; text-align: center; 
 	background: url(x/arrow1.png) center center no-repeat;
 	background-size: 100% 100%;
-	padding: 10px 28px;
+	padding: 10px 35px;
 }
 #xlist li:nth-child(3){ 
 	font-size: 18px;color: #FDAC00;

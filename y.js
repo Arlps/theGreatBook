@@ -839,7 +839,7 @@ option5 = {
         lineStyle: {
             normal: {
                 width: 1,
-				color:'#63EBFF'
+				color:'#FDAC00'
             }
         },
         data: data
@@ -1363,12 +1363,12 @@ star_option = {
 	radar: [
 	    {
 	        indicator: [
-	            { text: '爱情', max: 150 },
-	            { text: '事业', max: 150 },
-	            { text: '健康', max: 150 },
+	            { text: '爱情', max: 120 },
+	            { text: '事业', max: 120 },
+	            { text: '健康', max: 120 },
 	            { text: '心情', max: 120 },
-	            { text: '运气', max: 108 },
-	            { text: '动力', max: 72 }
+	            { text: '运气', max: 120 },
+	            { text: '动力', max: 120 }
 	        ],
 	        center: ['50%', '50%'],
 	        radius: 80,
@@ -1395,7 +1395,7 @@ star_option = {
 		{
 			type: 'graph',
 			layout: 'none',
-			symbolSize: 10,
+			symbolSize: 6,
 			roam: true,
 			label: {
 				show: true
@@ -1432,17 +1432,9 @@ star_option = {
 					value: [90, 113, 140, 30, 70, 60],
 					name: '123',
 					areaStyle: {
-						opacity: 0.7,
-						color: new echarts.graphic.RadialGradient(0.5, 0.5, 1, [
-							{
-								color: '#B8D3E4',
-								offset: 0
-							},
-							{
-								color: '#72ACD1',
-								offset: 1
-							}
-						])
+						opacity: 0.5,
+						color:"#EFA201",
+						// color: new echarts.graphic.RadialGradient(0.5, 0.5, 1, [ { color: '#B8D3E4', offset: 0 }, { color: '#72ACD1', offset: 1 } ])
 					}
 				}
 			]
@@ -1474,7 +1466,7 @@ setInterval(function(){
 	star_option.series[1].data[0].value=randArr(6);
 	star.setOption(star_option);
 	star_idx++;
-},2000)
+},4000)
 
 //心电图动态变化
 var o5=x5.getOption();
@@ -1482,7 +1474,6 @@ var beatsTimes=68;
 var timeGap=60*1000/(beats.length+beatsInterval)/beatsTimes;
 setInterval(function() { 
 	var flag=0;
-	
 	if(beatsNum<beats.length){
 		data.push(beats[beatsNum]); 
 	}else if((beatsNum>=beats.length) && (beatsNum<(beats.length+beatsInterval-1))){
