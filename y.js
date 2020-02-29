@@ -1,3 +1,23 @@
+var xList=
+	"<li>宜=>"+arrToStr(canlendar.huangli.yi," ")+"</li>"+
+	"<li>忌=>"+arrToStr(canlendar.huangli.ji," ")+"</li>"+
+	"<li>"+ weather.date +" "+ weather.week +"</li>"+
+	"<li>"+ weather.templow +"-"+ weather.temphigh +"℃"+ weather.weather +"</li>"+
+	"<li>未完成事务=>45</li>"+
+	"<li>配对星座=>双子座</li>"+
+	"<li>最佳颜色=>五颜六色</li>";
+		
+$("#xlist").html(xList)
+
+function arrToStr(arr,middle){
+	var str="";
+	for (var i = 0; i < arr.length; i++) {
+		str+=arr[i]+middle;
+	}
+	str.slice(-1);
+	return str;
+}
+
 // 环形进度图
 option1 = {
 	backgroundColor: 'rgba(0,0,0,0)',
@@ -312,7 +332,7 @@ option3 = {
     },
     series: [
         {
-            name: '速度',
+            name: 'WATER',
             type: 'gauge',
             min: 0,
             max: 220,
@@ -381,7 +401,7 @@ option3 = {
             data: [{value: 40, name: 'km/h'}]
         },
         {
-            name: '转速',
+            name: 'HUNGER',
             type: 'gauge',
             center: ['15%', '55%'],    // 默认全局居中
             radius: '30%',
@@ -455,7 +475,7 @@ option3 = {
             data: [{value: 1.5, name: 'x1000 r/min'}]
         },
         {
-            name: '油表',
+            name: 'HEAT',
             type: 'gauge',
             center: ['85%', '50%'],    // 默认全局居中
             radius: '30%',
@@ -517,7 +537,7 @@ option3 = {
             data: [{value: 0.5, name: 'gas'}]
         },
         {
-            name: '水表',
+            name: 'EXHAUST',
             type: 'gauge',
             center: ['85%', '50%'],    // 默认全局居中
             radius: '30%',
