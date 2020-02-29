@@ -335,7 +335,7 @@ option3 = {
             name: 'WATER',
             type: 'gauge',
             min: 0,
-            max: 220,
+            max: 100,
             splitNumber: 5,
             radius: '50%',
             axisLine: {            // 坐标轴线
@@ -348,8 +348,9 @@ option3 = {
                 }
             },
             axisLabel: {            // 坐标轴小标记
-                fontWeight: 'bolder',
+                fontWeight: 'bold',
 				fontSize:10,
+				margin:-5,
                 color: '#fff',
                 shadowColor: '#fff', //默认透明
                 shadowBlur: 2
@@ -373,16 +374,18 @@ option3 = {
             },
             pointer: {           // 分隔线
                 shadowColor: '#fff', //默认透明
-                shadowBlur: 1
+                shadowBlur: 1,
+				color:"#FDAC00"
             },
             title: {
                 textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                     fontWeight: 'bolder',
-                    fontSize: 5,
+                    fontSize: 8,
                     fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor: '#fff', //默认透明
-                    shadowBlur: 2
+                    color: '#FDAC00',
+                    shadowColor: '#FDAC00', //默认透明
+                    shadowBlur: 2,
+					offsetCenter:"50%"
                 }
             },
             detail: {
@@ -398,7 +401,7 @@ option3 = {
                     color: '#FDAC00'
                 }
             },
-            data: [{value: 40, name: 'km/h'}]
+            data: [{value: 40, name: 'HUNGER'}]
         },
         {
             name: 'HUNGER',

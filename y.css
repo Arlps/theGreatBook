@@ -1,3 +1,5 @@
+/* #FDAC00 #25B4D2 */
+
 @font-face { 
 font-family:lcdD ; 
 src:url(digital.ttf) ; 
@@ -33,7 +35,7 @@ body{
 	animation:xxx 1s infinite;
 }
 
-5770
+
 @keyframes xxx
 {
 	from {transform:rotateZ(0deg)}
