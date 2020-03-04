@@ -1509,11 +1509,11 @@ setInterval(function() {
 	}
 	beatsNum++;	
 	
-    // date.push(getTime(Math.round(new Date().getTime() / 1000)));
-	date.push(parseInt(Math.random()*10000));
+    date.push(getTime(Math.round(new Date().getTime() / 1000))+(Math.random()*10).toFixed(1));
+	// date.push(parseInt(Math.random()*10000));
 	
-	if(data.length>=50){ data.shift() }
-	if(date.length>=50){ date.shift() }
+	if(data.length>=20){ data.shift() }
+	if(date.length>=20){ date.shift() }
 	// console.log(date)
 	o5.series[0].data=data;
 	o5.xAxis[0].data=date;
