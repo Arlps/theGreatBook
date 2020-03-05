@@ -824,7 +824,7 @@ option5 = {
     xAxis: [{
         type: 'category',
         boundaryGap: false,
-		interval:5,
+		interval:8,
         axisLine: {
             lineStyle: {
                 color: '#57617B'
@@ -1514,11 +1514,8 @@ setInterval(function() {
 	
 	if(data.length>=20){ data.shift() }
 	if(date.length>=20){ date.shift() }
-	// console.log(date)
 	o5.series[0].data=data;
 	o5.xAxis[0].data=date;
-	// console.log(data);
-	// console.log(date)
 	
 	//刻度表变化
 	if(flag){

@@ -14,562 +14,115 @@
 		<script src="data/world.js"></script>
 	</head>
 	<body>
+		<div id="num"></div>
 		<div id="x" style="width: 600px; height: 300px; border:1px solid #ccc"></div>
 	</body>
 
 	<script type="text/javascript">
-		eight()
+		// 心电图
+		var beats=[15,0,-13,140,-45];
+		var date=[],data=[];
+		var beatsNum=0; beatsInterval=5;
+		option = {
+			backgroundColor: 'rgba(0,0,0,0)',
+		    xAxis: [{
+		        type: 'category',
+		        data: date
+		    }],
+		    yAxis: [{
+		        type: 'value',
+		    }],
+		    series: [{
+		        type: 'line',
+		        smooth:true,
+		        showSymbol: false,
+		        lineStyle: {
+		            normal: {
+		                width: 1,
+						color:'#aaa'
+		            }
+		        },
+		        data: data
+		    },]
+		};
+		var x5=chart(option,"x");
 		
-		function eight(){
-			option = {
-			    radar: [
-			        {
-			            indicator: [
-			                { text: 'INDEX VALUE', max: 100 },
-			                { text: 'INDEX VALUE', max: 100 },
-			                { text: 'INDEX VALUE', max: 100 },
-			                { text: 'INDEX VALUE', max: 100 },
-			                { text: 'INDEX VALUE', max: 100 },
-			                { text: 'INDEX VALUE', max: 100 }
-			            ],
-			            center: ['50%', '50%'],
-			            radius: 120
-			        }
-			    ],
-			    series: [
-			        {
-			            name: '成绩单',
-			            type: 'radar',
-			            radarIndex: 0,
-			            data: [
-			                {
-			                    value: [90, 113, 140, 30, 70, 60],
-			                    name: '李四',
-			                    areaStyle: {
-			                        opacity: 0.9,
-			                        color: new echarts.graphic.RadialGradient(0.5, 0.5, 1, [
-			                            {
-			                                color: '#B8D3E4',
-			                                offset: 0
-			                            },
-			                            {
-			                                color: '#72ACD1',
-			                                offset: 1
-			                            }
-			                        ])
-			                    }
-			                }
-			            ]
-			        }
-			    ]
-			}
-			
-			chart(option)
-		}
+		// var pulse=[0,0,1,2,5,2,1,0,0,0];
+		var pulse=[0,0,0,0,1,0,2,0,0,15,0,-13,140,-45,0,0,3,2,0,0]
+		var n=0;
+		var o5=x5.getOption();
+		var data=[],date=[];
 		
-		
-		// 地图人口
-		// geoChart()
-		function geoChart(){
-			$.getJSON('data/population.json', function (data) { 
-			
-			    data = data.filter(function (dataItem) {
-			        return dataItem[2] > 0;
-			    }).map(function (dataItem) {
-			        return [dataItem[0], dataItem[1], Math.sqrt(dataItem[2])];
-			    });
-			
-			    option={
-			        backgroundColor: 'rgba(0,0,0,0)',
-			        geo3D: {
-			            map: 'world',
-			            shading: 'realistic',
-			            light: {
-			                main: {
-			                    intensity: 5,
-			                    shadow: true,
-			                    shadowQuality: 'high',
-			                    alpha: 30
-			                },
-			                ambient: {
-			                    intensity: 0
-			                },
-			                ambientCubemap: {
-			                    // texture: 'data-gl/asset/canyon.hdr',
-			                    exposure: 1,
-			                    diffuseIntensity: 0.5
-			                }
-			            },
-			            viewControl: {
-			                distance: 50,
-			                panMouseButton: 'left',
-			                rotateMouseButton: 'right'
-			            },
-			            groundPlane: {
-			                show: false,
-			                color: 'rgba(0,0,0,0)'
-			            },
-			            postEffect: {
-			                enable: true,
-			                bloom: {
-			                    enable: false
-			                },
-			                SSAO: {
-			                    radius: 1,
-			                    intensity: 1,
-			                    enable: true
-			                },
-			                depthOfField: {
-			                    enable: false,
-			                    focalRange: 10,
-			                    blurRadius: 10,
-			                    fstop: 1
-			                }
-			            },
-			            temporalSuperSampling: {
-			                enable: true
-			            },
-			            itemStyle: {
-			            },
-			
-			            regionHeight: 2,
-						environment: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-						  offset: 0, color: '#00aaff' // 天空颜色
-						}, {
-						  offset: 0.7, color: '#998866' // 地面颜色
-						}, {
-						  offset: 1, color: '#998866' // 地面颜色
-						}], false)
-			        },
-			        visualMap: {
-			            max: 40,
-			            calculable: true,
-			            realtime: false,
-			            inRange: {
-			                // color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
-							color: [ '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-			            },
-			            outOfRange: {
-			                colorAlpha: 0
-			            }
-			        },
-			        series: [{
-			            type: 'bar3D',
-			            coordinateSystem: 'geo3D',
-						mapType: 'world', 
-			            shading: 'lambert',
-			            data: data,
-			            barSize: 0.1,
-			            minHeight: 0.2,
-			            silent: true,
-			            itemStyle: {
-			                color: 'orange'
-			                // opacity: 0.8
-			            }
-			        }]
-			    };
-				
-				chart(option)
-				
-			});
 
+		var x=[75,74,72,68,62,55,49,46,42,42,40,42,45,50,57,66,76,86,99,100,105,109,111,50];
+		var xn=0;
+		var timer;
+		var beats=75;
+		var interval=60000/beats/pulse.length;
+		loop(n,timer,beats,xn);
+		function loop(n,timer,beats,xn){
+			// console.log(beats)
+			timer=setTimeout(function(){
+				data.push(pulse[n]);
+				// date.push(parseInt(Math.random()*10000))
+				date.push(add0(new Date().getMinutes())+":"+add0(new Date().getSeconds())+":"+add0(parseInt(100/pulse.length*n)));
+				
+				if(data.length>=40){ data.shift() }
+				if(date.length>=40){ date.shift() }
+				o5.series[0].data=data;
+				o5.xAxis[0].data=date;
+				x5.setOption(o5);
+				n++;
+				if(n%19==0){
+					if(xn<x.length-1){
+						xn++;
+					}
+					beats=x[xn];
+					$("#num").html(beats)
+				}
+				if(n>=pulse.length){n=0;}
+				clearTimeout(timer)
+				loop(n,timer,beats,xn)
+			},60000/beats/pulse.length)
 		}
 		
-		//星座
-		// starChart()
-		function starChart(){
-			var constellation = {
-				"摩羯座": [
-					[
-						[0.78, 0.21],
-						[0.78, 0.34],
-						[0.75, 0.45],
-						[0.75, 0.70],
-						[0.69, 0.78],
-						[0.31, 0.66],
-						[0.22, 0.49],
-						[0.30, 0.53],
-						[0.53, 0.54]
-					],
-					[
-						[0, 1, 2, 3, 4, 5, 6, 7, 8, 1]
-					],
-					[
-						"Capricorn",
-						"12-22～1-20"
-					]
-				],
-				"水瓶座": [
-					[
-						[0.45, 0.21],
-						[0.37, 0.35],
-						[0.27, 0.51],
-						[0.30, 0.58],
-						[0.29, 0.64],
-						[0.48, 0.79],
-						[0.51, 0.71],
-						[0.58, 0.68],
-						[0.73, 0.74],
-						[0.43, 0.53],
-						[0.53, 0.47]
-					],
-					[
-						[0, 1, 2, 3, 4, 5, 6, 7, 8],
-						[2, 9, 10]
-					],
-					[
-						"Aquarius",
-						"1-21～2-19"
-					]
-				],
-				"双鱼座": [
-					[
-						[0.28, 0.43],
-						[0.28, 0.53],
-						[0.36, 0.73],
-						[0.43, 0.78],
-						[0.50, 0.70],
-						[0.53, 0.62],
-						[0.57, 0.58],
-						[0.63, 0.43],
-						[0.67, 0.39],
-						[0.74, 0.39],
-						[0.77, 0.34],
-						[0.72, 0.30],
-						[0.75, 0.22],
-						[0.23, 0.50],
-						[0.66, 0.33]
-					],
-					[
-						[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-						[0, 13, 1],
-						[8, 14, 11]
-					],
-					[
-						"Pisces",
-						"2-20～3-20"
-					]
-				],
-				"白羊座": [
-					[
-						[0.30, 0.78],
-						[0.34, 0.66],
-						[0.28, 0.48],
-						[0.60, 0.26],
-						[0.65, 0.20],
-						[0.71, 0.23],
-						[0.70, 0.32],
-						[0.72, 0.36]
-					],
-					[
-						[0, 1, 2, 3, 4, 5],
-						[3, 6, 7]
-					],
-					[
-						"Aries",
-						"3-21～4-20"
-					]
-				],
-				"金牛座": [
-					[
-						[0.29, 0.21],
-						[0.39, 0.36],
-						[0.50, 0.51],
-						[0.50, 0.57],
-						[0.61, 0.63],
-						[0.77, 0.71],
-						[0.79, 0.79],
-						[0.22, 0.43],
-						[0.39, 0.57],
-						[0.60, 0.71],
-						[0.67, 0.76]
-					],
-					[
-						[0, 1, 2, 3, 4, 5, 6],
-						[7, 8, 3],
-						[4, 9, 10]
-					],
-					[
-						"Taurus",
-						"4-21～5-21"
-					]
-				],
-				"双子座": [
-					[
-						[0.18, 0.37],
-						[0.25, 0.45],
-						[0.35, 0.55],
-						[0.39, 0.68],
-						[0.49, 0.77],
-						[0.51, 0.63],
-						[0.57, 0.78],
-						[0.28, 0.29],
-						[0.42, 0.32],
-						[0.61, 0.49],
-						[0.72, 0.60],
-						[0.83, 0.59],
-						[0.69, 0.75],
-						[0.22, 0.54],
-						[0.35, 0.43],
-						[0.48, 0.21]
-					],
-					[
-						[0, 1, 2, 3, 4],
-						[2, 5, 6],
-						[7, 8, 9, 10, 11],
-						[9, 12],
-						[13, 1, 14, 8, 15]
-					],
-					[
-						"Gemini",
-						"5-22～6-21"
-					]
-				],
-				"巨蟹座": [
-					[
-						[0.16, 0.39],
-						[0.27, 0.36],
-						[0.52, 0.49],
-						[0.57, 0.65],
-						[0.83, 0.78],
-						[0.44, 0.21]
-					],
-					[
-						[0, 1, 2, 3, 4],
-						[2, 5]
-					],
-					[
-						"Cancer",
-						"6-22～7-22"
-					]
-				],
-				"狮子座": [
-					[
-						[0.16, 0.75],
-						[0.23, 0.67],
-						[0.39, 0.77],
-						[0.71, 0.53],
-						[0.64, 0.39],
-						[0.55, 0.37],
-						[0.47, 0.27],
-						[0.54, 0.24],
-						[0.60, 0.27],
-						[0.85, 0.56]
-					],
-					[
-						[0, 1, 2, 3, 4, 5, 6, 7, 8],
-						[3, 9]
-					],
-					[
-						"Leo",
-						"7-23～8-23"
-					]
-				],
-				"处女座": [
-					[
-						[0.16, 0.59],
-						[0.35, 0.63],
-						[0.44, 0.70],
-						[0.62, 0.51],
-						[0.77, 0.46],
-						[0.84, 0.37],
-						[0.60, 0.42],
-						[0.65, 0.26],
-						[0.34, 0.75]
-					],
-					[
-						[0, 1, 2, 3, 4, 5],
-						[3, 6, 7],
-						[2, 8]
-					],
-					[
-						"Virgo",
-						"8-24～9-23"
-					]
-				],
-				"天秤座": [
-					[
-						[0.16, 0.67],
-						[0.34, 0.60],
-						[0.60, 0.27],
-						[0.75, 0.23],
-						[0.84, 0.47],
-						[0.63, 0.74],
-						[0.51, 0.78]
-					],
-					[
-						[0, 1, 2, 3, 4, 5, 6]
-					],
-					[
-						"Libra",
-						"9-24～10-23"
-					]
-				],
-				"天蝎座": [
-					[
-						[0.17, 0.50],
-						[0.28, 0.63],
-						[0.19, 0.70],
-						[0.28, 0.78],
-						[0.41, 0.77],
-						[0.49, 0.72],
-						[0.57, 0.55],
-						[0.59, 0.44],
-						[0.69, 0.31],
-						[0.74, 0.21],
-						[0.82, 0.29],
-						[0.79, 0.44],
-						[0.73, 0.50],
-						[0.38, 0.47]
-					],
-					[
-						[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-						[1, 13],
-						[8, 11]
-					],
-					[
-						"Scorpio",
-						"10-24～11-22"
-					]
-				],
-				"射手座": [
-					[
-						[0.22, 0.66],
-						[0.24, 0.51],
-						[0.45, 0.40],
-						[0.54, 0.37],
-						[0.59, 0.43],
-						[0.66, 0.50],
-						[0.63, 0.60],
-						[0.66, 0.67],
-						[0.74, 0.53],
-						[0.77, 0.39],
-						[0.49, 0.47],
-						[0.29, 0.68],
-						[0.30, 0.78],
-						[0.48, 0.21],
-						[0.52, 0.27],
-						[0.59, 0.29]
-					],
-					[
-						[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-						[2, 10, 11, 12],
-						[10, 4],
-						[13, 14, 15, 3],
-						[14, 3]
-					],
-					[
-						"Sagittarius",
-						"11-23～12-21"
-					]
-				]
-			};
-			
-			var star_key=[];
-			for(var key in constellation){
-				star_key.push(key)
-			}
-			function makeStarData(key){
-				var arr=constellation[key];
-				var data=[],link=[];
-				for (var i = 0; i < arr[0].length; i++) {
-					data.push({
-						x:arr[0][i][0],
-						y:arr[0][i][1]
-					})
-				}
-				for (var i = 0; i < arr[1].length; i++) {
-					for (var j = 0; j <arr[1][i].length-1; j++) {
-						link.push({
-							source:arr[1][i][j],
-							target:arr[1][i][j+1]
-						})
-					}
-				}
-				return {
-					name:key+" "+arr[2][0]+" "+arr[2][1],
-					data:data,
-					link:link
-				}
-			}
-			
-			
-			
-			var star_data=makeStarData(star_key[0]);
-			
-			star_option = {
-				title: {
-					text: star_data.name
-				},
-				tooltip: {},
-				animationDurationUpdate: 1500,
-				animationEasingUpdate: 'quinticInOut',
-				series: [
-					{
-						type: 'graph',
-						layout: 'none',
-						symbolSize: 10,
-						roam: true,
-						label: {
-							show: true
-						},
-						edgeSymbolSize: [4, 10],
-						edgeLabel: {
-							fontSize: 20
-						},
-						data: star_data.data,
-						links: star_data.link,
-						lineStyle: {
-							opacity: 0.9,
-							width: 1.5,
-							curveness: 0
-						},
-						"itemStyle": {
-							"normal": {
-								"color": "#72D3F9",
-								//   "borderWidth": 30,
-								"shadowBlur": 15,
-								"shadowColor": "#72D3F9",
-								//   color: '#66ff00',
-								borderColor: 'rgba(255, 255, 255, 0.2)',
-								borderWidth: 6
-							}
-						}
-					}
-				]
-			};
-					
-			var star=chart(star_option,"x");
-			// var star_option=star.getOption();
-			var star_idx=1;
-			setInterval(function(){
-				if(star_idx>=star_key.length){
-					star_idx=0;
-				}
-				var data=makeStarData(star_key[star_idx]);
-				star_option.title.text=data.name;
-				star_option.series[0].data=data.data;
-				star_option.series[0].links=data.link;
-				star_option.series[1].data[0].value=randArr(6);
-				star.setOption(star_option);
-				star_idx++;
-			},2000)
-			
-		}
-		function randArr(num){
-			var arr=[];
-			for (var i = 0; i < num; i++) {
-				arr.push(parseInt(Math.random()*100))
-			}
-			console.log(arr)
-			return arr;
-		}
-
+		
 		function chart(option, id) {
 			var mychart = echarts.init(document.getElementById("x"), 'dark');
 			mychart.setOption(option);
 			console.log(mychart)
 			return mychart;
+		}
+		
+		// ease(50,20,5);
+		function ease(start,add,duration,callback){
+			var steps=10;
+			var idx=0;
+			var res=0;
+			var timer=setInterval(function(){
+				if(idx<steps){
+					res=easeInOut(idx,start,add,steps);
+					console.log(res.toFixed(2));
+					if(callback){callback(res)}
+				}else{
+					clearInterval("timer");
+				}
+				idx++;
+			},duration*1000/steps)
+		}
+		
+		function easeInOut(t,b,c,d){
+			var x=t;
+			if ((t/=d/2) < 1) {
+				y=c/2*t*t*t + b;
+			} else{
+				y=c/2*((t-=2)*t*t + 2) + b;
+			}
+			return y;
+		}
+		
+		function add0(str){
+			return str.length<2?(str.length<2?"00"+str:"0"+str):str;
 		}
 	</script>
 </html>
