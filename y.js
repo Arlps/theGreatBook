@@ -801,9 +801,8 @@ option4 = {
 };
 
 // 心电图
-var beats=[15,0,-13,140,-45];
-var date=[],data=[];
-var beatsNum=0; beatsInterval=5;
+var date=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var data=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 option5 = {
 	backgroundColor: 'rgba(0,0,0,0)',
     grid: [{
@@ -855,9 +854,9 @@ option5 = {
         }
     }],
     series: [{
-        name: '发送',
+        // name: '发送',
         type: 'line',
-        smooth:true,
+        // smooth:true,
         showSymbol: false,
         lineStyle: {
             normal: {
@@ -869,7 +868,7 @@ option5 = {
     },{
         name: '统计',
         type: 'gauge',
-        splitNumber: 8, //刻度数量
+        splitNumber: 10, //刻度数量
         min: 0,
         max: 200,
         radius: '80%', //图表尺寸
@@ -938,7 +937,7 @@ option5 = {
       {
         name: '内部白色刻度',
         type: 'gauge',
-        splitNumber: 8, //刻度数量
+        splitNumber: 10, //刻度数量
         min: 0,
         max: 100,
         radius: '60%', //图表尺寸
@@ -1492,38 +1491,50 @@ setInterval(function(){
 },4000)
 
 //心电图动态变化
+var pulse=[0,0,0,0,1,0,2,0,0,15,0,-13,140,-45,0,0,1,0,2,0]
+var pn=0;
 var o5=x5.getOption();
-var beatsTimes=68;
-var timeGap=60*1000/(beats.length+beatsInterval)/beatsTimes;
-setInterval(function() { 
-	var flag=0;
-	if(beatsNum<beats.length){
-		data.push(beats[beatsNum]); 
-	}else if((beatsNum>=beats.length) && (beatsNum<(beats.length+beatsInterval-1))){
-		data.push(0)
-	}else{
-		data.push(0)
-		beatsNum=-1;
-		// beatsTimes=parseInt(60/((beats.length+beatsInterval)/(1000/timeGap)));
-		flag=1;
-	}
-	beatsNum++;	
-	
-    date.push(getTime(Math.round(new Date().getTime() / 1000))+(Math.random()*10).toFixed(1));
-	// date.push(parseInt(Math.random()*10000));
-	
-	if(data.length>=20){ data.shift() }
-	if(date.length>=20){ date.shift() }
-	o5.series[0].data=data;
-	o5.xAxis[0].data=date;
-	
-	//刻度表变化
-	if(flag){
-		o5.series[1].data[0].value=beatsTimes;
-		o5.series[1].axisLine.lineStyle.color=colorFunc(beatsTimes/120);
-	}
-	x5.setOption(o5);
-}, timeGap)
+
+var bx=[75,74,72,68,62,55,49,46,42,42,40,42,45,50,57,66,76,86,99,100,105,109,111,80,60,50,55,60,65,70];
+var bn=0;
+var btimer;
+var beats=75;
+var interval=60000/beats/pulse.length;
+loop(pn,btimer,beats,bn);
+
+function loop(pn,btimer,beats,bn){
+	// console.log(beats)
+	btimer=setTimeout(function(){
+		data.push(pulse[pn]);
+		// date.push(parseInt(Math.random()*10000))
+		date.push(add0(new Date().getMinutes())+":"+add0(new Date().getSeconds())+":"+add0(parseInt(100/pulse.length*pn)));
+		
+		if(data.length>=60){ data.shift() }
+		if(date.length>=60){ date.shift() }
+		o5.series[0].data=data;
+		o5.xAxis[0].data=date;
+		x5.setOption(o5);
+		pn++;
+		if(pn%19==0){
+			if(bn<bx.length-1){ bn++ }
+			else{ bn=0 }
+			beats=bx[bn];
+			o5.series[1].data[0].value=beats;
+			o5.series[1].axisLine.lineStyle.color=colorFunc(beats/150);
+			// $("#num").html(beats)
+		}
+		if(pn>=pulse.length){pn=0;}
+		clearTimeout(btimer)
+		loop(pn,btimer,beats,bn)
+	},60000/beats/pulse.length)
+}
+function add0(str){
+	return str.length<2?(str.length<2?"00"+str:"0"+str):str;
+}
+
+
+// o5.series[1].data[0].value=beatsTimes;
+// o5.series[1].axisLine.lineStyle.color=colorFunc(beatsTimes/120);
 
 waveChart(62,1,x1)
 function waveChart(num,range,chart){

@@ -34,12 +34,12 @@
 		    }],
 		    series: [{
 		        type: 'line',
-		        smooth:true,
+		        // smooth:true,
 		        showSymbol: false,
 		        lineStyle: {
 		            normal: {
 		                width: 1,
-						color:'#aaa'
+						color:'#ddd'
 		            }
 		        },
 		        data: data
@@ -48,43 +48,42 @@
 		var x5=chart(option,"x");
 		
 		// var pulse=[0,0,1,2,5,2,1,0,0,0];
-		var pulse=[0,0,0,0,1,0,2,0,0,15,0,-13,140,-45,0,0,3,2,0,0]
-		var n=0;
+		var pulse=[0,0,0,0,1,0,2,0,0,15,0,-13,140,-45,0,0,1,0,2,0]
+		var pn=0;
 		var o5=x5.getOption();
-		var data=[],date=[];
 		
 
-		var x=[75,74,72,68,62,55,49,46,42,42,40,42,45,50,57,66,76,86,99,100,105,109,111,80,60,50,55,60,65,70];
-		var xn=0;
-		var timer;
+		var bx=[75,74,72,68,62,55,49,46,42,42,40,42,45,50,57,66,76,86,99,100,105,109,111,80,60,50,55,60,65,70];
+		var bn=0;
+		var btimer;
 		var beats=75;
 		var interval=60000/beats/pulse.length;
-		loop(n,timer,beats,xn);
-		function loop(n,timer,beats,xn){
+		loop(pn,btimer,beats,bn);
+		function loop(pn,btimer,beats,bn){
 			// console.log(beats)
-			timer=setTimeout(function(){
-				data.push(pulse[n]);
+			btimer=setTimeout(function(){
+				data.push(pulse[pn]);
 				// date.push(parseInt(Math.random()*10000))
-				date.push(add0(new Date().getMinutes())+":"+add0(new Date().getSeconds())+":"+add0(parseInt(100/pulse.length*n)));
+				date.push(add0(new Date().getMinutes())+":"+add0(new Date().getSeconds())+":"+add0(parseInt(100/pulse.length*pn)));
 				
-				if(data.length>=40){ data.shift() }
-				if(date.length>=40){ date.shift() }
+				if(data.length>=60){ data.shift() }
+				if(date.length>=60){ date.shift() }
 				o5.series[0].data=data;
 				o5.xAxis[0].data=date;
 				x5.setOption(o5);
-				n++;
-				if(n%19==0){
-					if(xn<x.length-1){
-						xn++
+				pn++;
+				if(pn%19==0){
+					if(bn<bx.length-1){
+						bn++
 					}else{
-						xn=0
+						bn=0
 					}
-					beats=x[xn];
+					beats=bx[bn];
 					$("#num").html(beats)
 				}
-				if(n>=pulse.length){n=0;}
-				clearTimeout(timer)
-				loop(n,timer,beats,xn)
+				if(pn>=pulse.length){pn=0;}
+				clearTimeout(btimer)
+				loop(pn,btimer,beats,bn)
 			},60000/beats/pulse.length)
 		}
 		
