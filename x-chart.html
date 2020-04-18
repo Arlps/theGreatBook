@@ -95,6 +95,13 @@
 			return mychart;
 		}
 		
+		var test=[];
+		for (var i = 0; i < 10; i++) {
+			res=easeInOut(i,0,100,20);
+			test.push(res)
+		}
+		console.log(test)
+		
 		// ease(50,20,5);
 		function ease(start,add,duration,callback){
 			var steps=10;

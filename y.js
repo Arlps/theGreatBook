@@ -3,10 +3,8 @@ var xList=
 	"<li>忌=>"+arrToStr(canlendar.huangli.ji," ")+"</li>"+
 	"<li>"+ weather.date +" "+ weather.week +"</li>"+
 	"<li>"+ weather.templow +"-"+ weather.temphigh +"℃"+ weather.weather +"</li>"+
-	"<li>未完成事务=>45</li>"+
 	"<li>配对星座=>双子座</li>"+
-	"<li>最佳颜色=>五颜六色</li>";
-		
+	"<li>幸运色=>Purple</li>";
 $("#xlist").html(xList)
 
 function arrToStr(arr,middle){
@@ -1509,14 +1507,14 @@ function loop(pn,btimer,beats,bn){
 		// date.push(parseInt(Math.random()*10000))
 		date.push(add0(new Date().getMinutes())+":"+add0(new Date().getSeconds())+":"+add0(parseInt(100/pulse.length*pn)));
 		
-		if(data.length>=60){ data.shift() }
-		if(date.length>=60){ date.shift() }
+		if(data.length>=40){ data.shift() }
+		if(date.length>=40){ date.shift() }
 		o5.series[0].data=data;
 		o5.xAxis[0].data=date;
 		x5.setOption(o5);
 		pn++;
 		if(pn%19==0){
-			if(bn<bx.length-1){ bn++ }
+			if(bn<bx.length-1){ bn++; }
 			else{ bn=0 }
 			beats=bx[bn];
 			o5.series[1].data[0].value=beats;
